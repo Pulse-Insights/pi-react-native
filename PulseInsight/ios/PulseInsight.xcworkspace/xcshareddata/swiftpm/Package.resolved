@@ -1,0 +1,15 @@
+{
+  "originHash" : "59cbb807b2348d3615bb0a6b7abd5ecaaae16d3883e371d59dbc8c31ca672c77",
+  "pins" : [
+    {
+      "identity" : "pi-ios-spm",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Pulse-Insights/pi-ios-spm.git",
+      "state" : {
+        "revision" : "95956452d5ea44c23cee9d8d228cb427cfa0e47a",
+        "version" : "1.0.9"
+      }
+    }
+  ],
+  "version" : 3
+}

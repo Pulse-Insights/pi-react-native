@@ -4,7 +4,6 @@
 
 export interface PulseInsightOptions {
   apiKey: string;
-  // 其他配置选项
 }
 
 export class PulseInsight {
@@ -14,12 +13,9 @@ export class PulseInsight {
     this.options = options;
   }
 
-  /**
-   * 初始化SDK
-   */
   async initialize(): Promise<boolean> {
     try {
-      // 这里将来会调用原生模块
+      // TODO
       console.log('PulseInsight SDK initialized with API key:', this.options.apiKey);
       return true;
     } catch (error) {
@@ -28,12 +24,9 @@ export class PulseInsight {
     }
   }
 
-  /**
-   * 记录事件
-   */
   async trackEvent(eventName: string, properties: Record<string, any> = {}): Promise<void> {
     try {
-      // 这里将来会调用原生模块
+      // TODO
       console.log(`Event tracked: ${eventName}`, properties);
     } catch (error) {
       console.error(`Failed to track event ${eventName}:`, error);
@@ -41,5 +34,4 @@ export class PulseInsight {
   }
 }
 
-// 默认导出
 export default PulseInsight;

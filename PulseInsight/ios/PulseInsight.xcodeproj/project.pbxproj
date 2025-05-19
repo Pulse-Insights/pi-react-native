@@ -12,6 +12,8 @@
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		BB07E3202DD7585500E0810A /* PulseInsights in Frameworks */ = {isa = PBXBuildFile; productRef = BB07E31F2DD7585500E0810A /* PulseInsights */; };
+		BB07E3272DDB033800E0810A /* RCTPulseInsight.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB07E3262DDB033800E0810A /* RCTPulseInsight.swift */; };
+		BB07E32E2DDB0CDF00E0810A /* RCTPulseInsight.m in Sources */ = {isa = PBXBuildFile; fileRef = BB07E32D2DDB0CDF00E0810A /* RCTPulseInsight.m */; };
 		EAA0E94414A431F548015311 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +27,10 @@
 		5DCACB8F33CDC322A6C60F78 /* libPods-PulseInsight.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PulseInsight.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = PulseInsight/AppDelegate.swift; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = PulseInsight/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		BB07E3262DDB033800E0810A /* RCTPulseInsight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCTPulseInsight.swift; sourceTree = "<group>"; };
+		BB07E32B2DDB0CDF00E0810A /* PulseInsight-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PulseInsight-Bridging-Header.h"; sourceTree = "<group>"; };
+		BB07E32C2DDB0CDF00E0810A /* RCTPulseInsight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTPulseInsight.h; sourceTree = "<group>"; };
+		BB07E32D2DDB0CDF00E0810A /* RCTPulseInsight.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTPulseInsight.m; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -49,6 +55,10 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */,
+				BB07E3262DDB033800E0810A /* RCTPulseInsight.swift */,
+				BB07E32C2DDB0CDF00E0810A /* RCTPulseInsight.h */,
+				BB07E32D2DDB0CDF00E0810A /* RCTPulseInsight.m */,
+				BB07E32B2DDB0CDF00E0810A /* PulseInsight-Bridging-Header.h */,
 			);
 			name = PulseInsight;
 			sourceTree = "<group>";
@@ -133,7 +143,7 @@
 				LastUpgradeCheck = 1210;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1620;
 					};
 				};
 			};
@@ -251,6 +261,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB07E32E2DDB0CDF00E0810A /* RCTPulseInsight.m in Sources */,
+				BB07E3272DDB033800E0810A /* RCTPulseInsight.swift in Sources */,
 				761780ED2CA45674006654EE /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -281,6 +293,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = com.pulseinsights.rn;
 				PRODUCT_NAME = PulseInsight;
+				SWIFT_OBJC_BRIDGING_HEADER = "PulseInsight-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -309,6 +322,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = com.pulseinsights.rn;
 				PRODUCT_NAME = PulseInsight;
+				SWIFT_OBJC_BRIDGING_HEADER = "PulseInsight-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

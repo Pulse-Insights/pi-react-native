@@ -1,5 +1,5 @@
 /**
- * PulseInsight React Native SDK 演示应用
+ * PulseInsight React Native SDK Example app
  */
 
 import React, {useEffect, useState, useMemo} from 'react';
@@ -14,18 +14,16 @@ import {
   Alert,
 } from 'react-native';
 
-import PulseInsight from './src/sdk'; // 引用本地SDK
+import PulseInsight from './src/sdk';
 
 function App(): React.JSX.Element {
   const [sdkInitialized, setSdkInitialized] = useState(false);
 
-  // 使用useMemo缓存pulseInsight实例，避免每次渲染都重新创建
   const pulseInsight = useMemo(() => new PulseInsight({apiKey: 'demo-api-key'}), []);
 
   useEffect(() => {
     async function initSDK() {
       try {
-        // 初始化SDK
         const success = await pulseInsight.initialize();
         setSdkInitialized(success);
 
@@ -40,15 +38,15 @@ function App(): React.JSX.Element {
     }
 
     initSDK();
-  }, [pulseInsight]); // 添加pulseInsight到依赖数组
+  }, [pulseInsight]);
 
   const trackEvent = async (eventName: string, properties?: Record<string, any>) => {
     try {
       await pulseInsight.trackEvent(eventName, properties);
-      Alert.alert('事件已记录', `已成功记录事件: ${eventName}`);
+      Alert.alert('Event log', `succeed: ${eventName}`);
     } catch (error) {
       console.error('Failed to track event:', error);
-      Alert.alert('错误', '记录事件失败');
+      Alert.alert('Event log', 'Error: ' + error);
     }
   };
 

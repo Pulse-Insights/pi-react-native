@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
   Alert,
+  StatusBar,
+  Platform,
 } from 'react-native';
-import PulseInsight from '../sdk';
+import PulseInsight, { RCTInlineSurveyView } from '../sdk';
 
 interface InlineSurveyScreenProps {
   sdk: PulseInsight | null;
@@ -22,30 +23,52 @@ const InlineSurveyScreen: React.FC<InlineSurveyScreenProps> = ({
   sdkInitialized,
   onBack,
 }) => {
-  const [surveyViewName, setSurveyViewName] = useState('');
+  const surveyViewName = 'inlineXibView';
+  const inlineSurveyId = 'InlineXib';
+  const [displaySurvey, setDisplaySurvey] = useState(false);
 
-  const setSurveyContainerViewName = async () => {
-    if (!surveyViewName.trim()) {
-      Alert.alert('Error', 'Please enter a view name');
-      return;
+  const setViewNameSilently = useCallback(async () => {
+    if (!sdk || !sdkInitialized) {return;}
+
+    try {
+      await sdk.setViewName(surveyViewName);
+      console.log(`View name set to: ${surveyViewName}`);
+    } catch (error) {
+      console.error('Failed to set view name:', error);
     }
+  }, [sdk, sdkInitialized]);
 
+  useEffect(() => {
+    if (sdk && sdkInitialized) {
+      setViewNameSilently();
+    }
+  }, [sdk, sdkInitialized, setViewNameSilently]);
+
+  const triggerServe = useCallback(async () => {
     if (!sdk || !sdkInitialized) {
       Alert.alert('Error', 'SDK not initialized');
       return;
     }
 
     try {
-      await sdk.setViewName(surveyViewName);
-      Alert.alert('Success', `View name set to: ${surveyViewName}`);
+      await sdk.serve();
+      console.log('Serve triggered');
+      setDisplaySurvey(true);
     } catch (error) {
-      console.error('Failed to set view name:', error);
-      Alert.alert('Error', 'Failed to set view name');
+      console.error('Failed to trigger serve:', error);
+      Alert.alert('Error', 'Failed to trigger serve');
     }
-  };
+  }, [sdk, sdkInitialized]);
+
+  const handleSurveyFinish = useCallback(() => {
+    console.log('Survey completed or closed, hiding the survey view');
+    setDisplaySurvey(false);
+  }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.safeAreaContainer}>
+      <StatusBar barStyle="dark-content" />
+
       <View style={styles.header}>
         <TouchableOpacity style={styles.backButton} onPress={onBack}>
           <Text style={styles.backButtonText}>← Back</Text>
@@ -53,55 +76,71 @@ const InlineSurveyScreen: React.FC<InlineSurveyScreenProps> = ({
         <Text style={styles.title}>Inline Survey Example</Text>
       </View>
 
-      <ScrollView contentContainerStyle={styles.scrollContent}>
+      <ScrollView
+        style={styles.scrollView}
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={true}
+        bounces={false}
+        removeClippedSubviews={Platform.OS === 'android'}
+        scrollEventThrottle={16}
+      >
         <Text style={styles.paragraph}>
           This is an example page showing how inline surveys can be integrated into your app.
-          The survey will appear in the designated container below when available.
-        </Text>
-
-        <Text style={styles.paragraph}>
           Inline surveys allow you to collect feedback directly within your app's flow
           without disrupting the user experience with modal pop-ups.
         </Text>
 
-        <View style={styles.viewNameContainer}>
-          <TextInput
-            style={styles.input}
-            placeholder="Enter View Name for Survey"
-            value={surveyViewName}
-            onChangeText={setSurveyViewName}
-          />
-          <TouchableOpacity style={styles.button} onPress={setSurveyContainerViewName}>
-            <Text style={styles.buttonText}>Set View Name</Text>
+        <Text style={styles.paragraph}>
+          This page is using a preconfigured inline survey with:
+          {'\n'}• View name: <Text style={styles.highlight}>{surveyViewName}</Text>
+          {'\n'}• Survey ID: <Text style={styles.highlight}>{inlineSurveyId}</Text>
+        </Text>
+
+        {/* Serve Button */}
+        <View style={styles.actionContainer}>
+          <TouchableOpacity
+            style={[styles.actionButton, !displaySurvey ? styles.activeButton : styles.disabledButton]}
+            onPress={triggerServe}
+            disabled={displaySurvey}
+          >
+            <Text style={styles.buttonText}>Show Inline Survey</Text>
           </TouchableOpacity>
         </View>
 
-        {/* Container for inline survey */}
-        <View style={styles.surveyContainer}>
-          <Text style={styles.surveyPlaceholder}>
-            {surveyViewName ?
-              `Survey container with view name: ${surveyViewName}` :
-              'Set a view name above to associate this container with surveys'
-            }
-          </Text>
-        </View>
+        <Text style={styles.paragraph}>
+          After clicking the button above, a survey will appear below if one is available for this view.
+          The survey will be embedded naturally into the content flow, providing a seamless experience.
+        </Text>
+
+        {displaySurvey && (
+          <RCTInlineSurveyView
+            identifier={inlineSurveyId}
+            style={styles.surveyComponent}
+            onFinish={handleSurveyFinish}
+          />
+        )}
 
         <Text style={styles.paragraph}>
-          After setting the view name, any surveys configured for this view in your
-          PulseInsight dashboard will appear in the container above when conditions are met.
+          Inline surveys can be strategically placed throughout your app to gather
+          contextual feedback at key moments in the user journey. This approach typically
+          results in higher response rates and more valuable insights compared to
+          traditional pop-up surveys.
         </Text>
 
         <Text style={styles.paragraph}>
-          You can style and position the survey container to fit naturally within your app's
-          design, providing a seamless survey experience.
+          For developers: This example demonstrates the recommended component-based approach
+          using the {'<RCTInlineSurveyView>'} component. The survey is configured with
+          the identifier "{inlineSurveyId}" and will display when conditions are met.
         </Text>
+
+        <View style={styles.bottomPadding} />
       </ScrollView>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  safeAreaContainer: {
     flex: 1,
     backgroundColor: '#F5F5F5',
   },
@@ -112,6 +151,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderBottomWidth: 1,
     borderBottomColor: '#ddd',
+    zIndex: 1,
   },
   backButton: {
     marginRight: 16,
@@ -126,56 +166,51 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#333',
   },
+  scrollView: {
+    flex: 1,
+  },
   scrollContent: {
     padding: 20,
+    paddingBottom: 40,
   },
   paragraph: {
     fontSize: 16,
     lineHeight: 24,
     color: '#555',
-    marginBottom: 16,
-  },
-  viewNameContainer: {
-    flexDirection: 'row',
     marginBottom: 20,
-    marginTop: 10,
   },
-  input: {
-    flex: 1,
-    height: 44,
-    borderWidth: 1,
-    borderColor: '#ddd',
-    borderRadius: 6,
-    paddingHorizontal: 10,
-    backgroundColor: '#fff',
-    marginRight: 10,
+  highlight: {
+    fontWeight: 'bold',
+    color: '#3498db',
   },
-  button: {
-    backgroundColor: '#3498db',
-    paddingVertical: 10,
-    paddingHorizontal: 15,
+  actionContainer: {
+    marginVertical: 20,
+  },
+  actionButton: {
+    padding: 14,
     borderRadius: 6,
     justifyContent: 'center',
+    alignItems: 'center',
+  },
+  activeButton: {
+    backgroundColor: '#2ecc71',
+  },
+  disabledButton: {
+    backgroundColor: '#bdc3c7',
   },
   buttonText: {
     color: 'white',
     fontWeight: '600',
-  },
-  surveyContainer: {
-    minHeight: 200,
-    backgroundColor: '#fff',
-    borderWidth: 1,
-    borderColor: '#ddd',
-    borderRadius: 8,
-    padding: 20,
-    marginVertical: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  surveyPlaceholder: {
     fontSize: 16,
-    color: '#999',
     textAlign: 'center',
+  },
+  surveyComponent: {
+    width: '100%',
+    height: 400,
+    backgroundColor: 'transparent',
+  },
+  bottomPadding: {
+    height: 40,
   },
 });
 

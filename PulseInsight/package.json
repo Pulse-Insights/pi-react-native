@@ -40,6 +40,20 @@
   "engines": {
     "node": ">=18"
   },
+  "homepage": "https://github.com/Pulse-Insights/pi-react-native-sdk",
+  "author": "Pulse Insights",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pulse-Insights/pi-react-native-sdk.git"
+  },
+  "keywords": [
+    "react-native",
+    "pulse-insight",
+    "survey",
+    "analytics"
+  ],
+  "podspec": "../pulse-insight-react-native.podspec",
   "codegenConfig": {
     "name": "PulseInsightSpec",
     "type": "modules",

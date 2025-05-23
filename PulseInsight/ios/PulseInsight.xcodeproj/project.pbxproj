@@ -14,6 +14,8 @@
 		BB07E3202DD7585500E0810A /* PulseInsights in Frameworks */ = {isa = PBXBuildFile; productRef = BB07E31F2DD7585500E0810A /* PulseInsights */; };
 		BB07E3272DDB033800E0810A /* RCTPulseInsight.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB07E3262DDB033800E0810A /* RCTPulseInsight.swift */; };
 		BB07E32E2DDB0CDF00E0810A /* RCTPulseInsight.m in Sources */ = {isa = PBXBuildFile; fileRef = BB07E32D2DDB0CDF00E0810A /* RCTPulseInsight.m */; };
+		BB07E3602DDC80A900E0810A /* RCTInlineSurveyViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB07E35F2DDC80A900E0810A /* RCTInlineSurveyViewManager.swift */; };
+		BB07E3622DDC80F800E0810A /* RCTInlineSurveyViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BB07E3612DDC80F800E0810A /* RCTInlineSurveyViewManager.m */; };
 		EAA0E94414A431F548015311 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +33,8 @@
 		BB07E32B2DDB0CDF00E0810A /* PulseInsight-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PulseInsight-Bridging-Header.h"; sourceTree = "<group>"; };
 		BB07E32C2DDB0CDF00E0810A /* RCTPulseInsight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTPulseInsight.h; sourceTree = "<group>"; };
 		BB07E32D2DDB0CDF00E0810A /* RCTPulseInsight.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTPulseInsight.m; sourceTree = "<group>"; };
+		BB07E35F2DDC80A900E0810A /* RCTInlineSurveyViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCTInlineSurveyViewManager.swift; sourceTree = "<group>"; };
+		BB07E3612DDC80F800E0810A /* RCTInlineSurveyViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTInlineSurveyViewManager.m; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -59,6 +63,8 @@
 				BB07E32C2DDB0CDF00E0810A /* RCTPulseInsight.h */,
 				BB07E32D2DDB0CDF00E0810A /* RCTPulseInsight.m */,
 				BB07E32B2DDB0CDF00E0810A /* PulseInsight-Bridging-Header.h */,
+				BB07E35F2DDC80A900E0810A /* RCTInlineSurveyViewManager.swift */,
+				BB07E3612DDC80F800E0810A /* RCTInlineSurveyViewManager.m */,
 			);
 			name = PulseInsight;
 			sourceTree = "<group>";
@@ -262,6 +268,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB07E32E2DDB0CDF00E0810A /* RCTPulseInsight.m in Sources */,
+				BB07E3602DDC80A900E0810A /* RCTInlineSurveyViewManager.swift in Sources */,
+				BB07E3622DDC80F800E0810A /* RCTInlineSurveyViewManager.m in Sources */,
 				BB07E3272DDB033800E0810A /* RCTPulseInsight.swift in Sources */,
 				761780ED2CA45674006654EE /* AppDelegate.swift in Sources */,
 			);
@@ -397,10 +405,7 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
@@ -469,10 +474,7 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;

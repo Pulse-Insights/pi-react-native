@@ -2,7 +2,8 @@
  * PulseInsight React Native SDK
  */
 
-import { NativeModules, Platform } from 'react-native';
+import { NativeModules } from 'react-native';
+import RCTInlineSurveyView from './components/RCTInlineSurveyView';
 
 const { RCTPulseInsight } = NativeModules;
 
@@ -185,6 +186,33 @@ export class PulseInsight {
     }
   }
 
+  /**
+   * @deprecated Use the `<RCTInlineSurveyView />` component instead for a more React-native approach.
+   *
+   * Creates an inline survey with the specified identifier.
+   * This method is kept for compatibility, but it's recommended to use the declarative
+   * component approach with RCTInlineSurveyView for better integration with React Native.
+   *
+   * @example
+   * // Imperative approach (not recommended)
+   * sdk.createInlineSurvey("survey123");
+   *
+   * // Declarative approach (recommended)
+   * import { RCTInlineSurveyView } from 'pulse-insight-react-native';
+   * <RCTInlineSurveyView identifier="survey123" style={{height: 200}} />
+   *
+   * @param identifier The unique identifier for the survey
+   */
+  async createInlineSurvey(identifier: string): Promise<void> {
+    try {
+      this.ensureInitialized();
+      await RCTPulseInsight.createInlineSurvey(identifier);
+    } catch (error) {
+      console.error(`Failed to create inline survey with ID ${identifier}:`, error);
+      throw error;
+    }
+  }
+
   async setHost(hostName: string): Promise<void> {
     try {
       this.ensureInitialized();
@@ -212,6 +240,20 @@ export class PulseInsight {
     }
   }
 
+  /**
+   * Manually finish the inline survey mode.
+   * This can be used to force close any active inline surveys.
+   */
+  async finishInlineMode(): Promise<void> {
+    try {
+      this.ensureInitialized();
+      await RCTPulseInsight.finishInlineMode();
+      console.log('Inline survey mode finished');
+    } catch (error) {
+      console.error('Failed to finish inline survey mode:', error);
+    }
+  }
+
   private ensureInitialized(): void {
     if (!this.initialized) {
       throw new Error('PulseInsight SDK is not initialized. Call initialize() first.');
@@ -220,3 +262,5 @@ export class PulseInsight {
 }
 
 export default PulseInsight;
+// 导出 RCTInlineSurveyView 组件供用户使用
+export { RCTInlineSurveyView };

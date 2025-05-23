@@ -79,10 +79,55 @@ class RCTPulseInsight: NSObject {
     PulseInsights.getInstance.present(surveyId)
   }
   
+  /**
+   * Creates an inline survey using the imperative API.
+   * Note: For a better React Native integration, consider using the PulseInsightSurveyView component instead.
+   */
   @objc
-  func createInlineSurvey(_ identifier: String) {
-    let inlineSurveyView = InlineSurveyView(identifier: identifier)
-    // TODO
+  func createInlineSurvey(_ identifier: String, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) {
+    print("RCTPulseInsight: Creating inline survey with identifier: \(identifier)")
+      
+    guard !identifier.isEmpty else {
+      reject("EMPTY_ID", "Cannot create inline survey - Empty identifier", nil)
+      return
+    }
+    
+    DispatchQueue.main.async { [weak self] in
+      guard let self = self else {
+        reject("DEALLOCATED", "RCTPulseInsight instance was deallocated", nil)
+        return
+      }
+      
+      if let viewController = self.currentViewControllerFromBridge() {
+        PulseInsights.getInstance.setViewController(viewController)
+        let inlineSurveyView = InlineSurveyView(identifier: identifier)
+        
+        class InlineCallback: SurveyInlineResult {
+          func onDisplay() -> Bool {
+            return true
+          }
+          
+          func onServeResult() {
+            print("RCTPulseInsight: Inline survey content ready")
+          }
+          
+          func onFinish() {
+            print("RCTPulseInsight: Inline survey finished")
+          }
+        }
+        
+        if let callback = inlineSurveyView as? SurveyInlineResult {
+          PulseInsights.getInstance.inlineServe(callback)
+        } else {
+          PulseInsights.getInstance.inlineServe(InlineCallback())
+        }
+        
+        print("RCTPulseInsight: Inline survey view created and registered")
+        resolve(true)
+      } else {
+        reject("NO_VIEW", "Cannot create inline survey - No view controller found", nil)
+      }
+    }
   }
   
   @objc
@@ -148,5 +193,15 @@ class RCTPulseInsight: NSObject {
   @objc
   func resetUdid() {
     PulseInsights.getInstance.resetUdid()
+  }
+  
+  /**
+   * Manually finish the inline survey mode
+   * This can be used by React Native to force close any active inline surveys
+   */
+  @objc
+  func finishInlineMode() {
+    print("RCTPulseInsight: Manually finishing inline mode")
+    PulseInsights.getInstance.finishInlineMode()
   }
 }

@@ -168,10 +168,10 @@ export class PulseInsight {
     }
   }
 
-  async setContextData(data: Record<string, string>): Promise<void> {
+  async setContextData(data: Record<string, string>, merge: boolean = false): Promise<void> {
     try {
       this.ensureInitialized();
-      await RCTPulseInsight.setContextData(data);
+      await RCTPulseInsight.setContextData(data, merge);
     } catch (error) {
       console.error('Failed to set context data:', error);
     }

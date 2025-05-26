@@ -30,7 +30,7 @@ export interface Spec extends TurboModule {
 
   checkSurveyAnswered(surveyId: string): boolean;
 
-  setContextData(data: { [key: string]: string }): void;
+  setContextData(data: { [key: string]: string }, merge?: boolean): void;
   clearContextData(): void;
 
   setDeviceData(data: { [key: string]: string }): void;

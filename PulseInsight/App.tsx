@@ -260,15 +260,45 @@ function App(): React.JSX.Element {
       return obj;
     }, {} as Record<string, string>);
 
-    pulseInsightRef.current.setContextData(contextData)
-      .then(() => {
-        console.log('Context data set successfully', contextData);
-        Alert.alert('Success', 'Context data set successfully');
-      })
-      .catch(err => {
-        console.error('Failed to set context data:', err);
-        Alert.alert('Error', 'Failed to set context data');
-      });
+    // Ask user if they want to merge or replace
+    Alert.alert(
+      'Set Context Data',
+      'Do you want to merge with existing context data or replace it?',
+      [
+        {
+          text: 'Replace',
+          onPress: () => {
+            pulseInsightRef.current?.setContextData(contextData, false)
+              .then(() => {
+                console.log('Context data replaced successfully', contextData);
+                Alert.alert('Success', 'Context data replaced successfully');
+              })
+              .catch(err => {
+                console.error('Failed to set context data:', err);
+                Alert.alert('Error', 'Failed to set context data');
+              });
+          },
+        },
+        {
+          text: 'Merge',
+          onPress: () => {
+            pulseInsightRef.current?.setContextData(contextData, true)
+              .then(() => {
+                console.log('Context data merged successfully', contextData);
+                Alert.alert('Success', 'Context data merged successfully');
+              })
+              .catch(err => {
+                console.error('Failed to set context data:', err);
+                Alert.alert('Error', 'Failed to set context data');
+              });
+          },
+        },
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+      ]
+    );
   };
 
   const handleClearContextData = () => {

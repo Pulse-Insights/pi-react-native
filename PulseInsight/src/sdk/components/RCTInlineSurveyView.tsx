@@ -5,6 +5,7 @@ interface RCTInlineSurveyViewProps {
   identifier: string;
   style?: ViewStyle;
   onFinish?: (event: NativeSyntheticEvent<{ success: boolean }>) => void;
+  onContentLoaded?: (event: NativeSyntheticEvent<{ height: number; loaded: boolean }>) => void;
 }
 
 /**

@@ -23,7 +23,7 @@ RCT_EXTERN_METHOD(getClientKey:(RCTPromiseResolveBlock)resolve rejecter:(RCTProm
 RCT_EXTERN_METHOD(setPreviewMode:(BOOL)enable)
 RCT_EXTERN_METHOD(isPreviewModeOn:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
 RCT_EXTERN_METHOD(checkSurveyAnswered:(NSString *)surveyId resolve:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
-RCT_EXTERN_METHOD(setContextData:(NSDictionary *)data)
+RCT_EXTERN_METHOD(setContextData:(NSDictionary *)data merge:(BOOL)merge)
 RCT_EXTERN_METHOD(clearContextData)
 RCT_EXTERN_METHOD(setDeviceData:(NSDictionary *)data)
 RCT_EXTERN_METHOD(setHost:(NSString *)hostName)

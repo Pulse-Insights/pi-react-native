@@ -166,8 +166,8 @@ class RCTPulseInsight: NSObject {
   }
   
   @objc
-  func setContextData(_ data: [String: String]) {
-    PulseInsights.getInstance.setContextData(data)
+  func setContextData(_ data: [String: String], merge: Bool = false) {
+    PulseInsights.getInstance.setContextData(data, merge: merge)
   }
   
   @objc

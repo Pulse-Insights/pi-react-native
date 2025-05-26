@@ -4,6 +4,49 @@ This is a new [**React Native**](https://reactnative.dev) project, bootstrapped 
 
 > **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
 
+## Prerequisites
+
+### Java 17 Requirement
+
+This project requires **Java 17** for Android builds. You have several options to configure this:
+
+#### Option 1: Set JAVA_HOME environment variable (Recommended)
+```bash
+# For macOS with Homebrew
+export JAVA_HOME=/opt/homebrew/Cellar/openjdk@17/17.0.11/libexec/openjdk.jdk/Contents/Home
+
+# For macOS with Oracle JDK
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home
+
+# Add to your shell profile (~/.zshrc, ~/.bash_profile, etc.) to make it permanent
+echo 'export JAVA_HOME=/path/to/your/java17' >> ~/.zshrc
+```
+
+#### Option 2: Use jenv (if you have multiple Java versions)
+```bash
+# Install Java 17 if not already installed
+brew install openjdk@17
+
+# Set Java 17 for this project only
+jenv local 17
+```
+
+#### Option 3: Project-specific configuration
+Uncomment and modify the line in `android/gradle.properties`:
+```properties
+org.gradle.java.home=/path/to/your/java17
+```
+> **Warning**: This approach is not recommended for team projects as paths vary between developers.
+
+### Verify Java 17 Installation
+```bash
+# Check available Java versions
+/usr/libexec/java_home -V
+
+# Verify current Java version
+java -version
+```
+
 ## Step 1: Start Metro
 
 First, you will need to run **Metro**, the JavaScript build tool for React Native.

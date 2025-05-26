@@ -1,0 +1,16 @@
+# Copy this file to local.properties and update the paths for your system
+# This file should NOT be committed to version control
+
+# Android SDK location
+# Update this path to match your Android SDK installation
+sdk.dir=/Users/YOUR_USERNAME/Library/Android/sdk
+
+# Java 17 path (REQUIRED for this project)
+# Update this path to match your Java 17 installation
+org.gradle.java.home=/path/to/your/java17
+
+# Common Java 17 paths:
+# macOS with Homebrew: /opt/homebrew/Cellar/openjdk@17/17.0.11/libexec/openjdk.jdk/Contents/Home
+# macOS with Oracle JDK: /Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home
+# Linux: /usr/lib/jvm/java-17-openjdk
+# Windows: C:\Program Files\Java\jdk-17 

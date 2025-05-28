@@ -64,7 +64,7 @@ export class PulseInsight {
     }
   }
 
-  // 视图跟踪
+  // View tracking
   async setViewName(viewName: string): Promise<void> {
     try {
       this.ensureInitialized();
@@ -262,5 +262,5 @@ export class PulseInsight {
 }
 
 export default PulseInsight;
-// 导出 RCTInlineSurveyView 组件供用户使用
+// Export RCTInlineSurveyView component for users
 export { RCTInlineSurveyView };

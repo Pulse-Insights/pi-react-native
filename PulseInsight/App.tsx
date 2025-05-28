@@ -14,6 +14,7 @@ import {
   View,
   Alert,
   FlatList,
+  Platform,
 } from 'react-native';
 
 import PulseInsight from './src/sdk';
@@ -50,7 +51,7 @@ function App(): React.JSX.Element {
         const sdk = new PulseInsight({
           accountId: accountId,
           enableDebugMode: true,
-          customData: {'name': 'test_ios_rn', 'type': 'worker', 'age': '52'},
+          customData: {'name': `test_rn_from_${Platform.OS}`, 'type': 'worker', 'age': '52'},
         });
 
         // Initialize the SDK

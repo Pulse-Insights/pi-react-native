@@ -20,7 +20,6 @@ interface RCTInlineSurveyViewProps {
  * ```
  */
 
-// 使用requireNativeComponent直接引用原生组件
 const NativeInlineSurveyView = requireNativeComponent('RCTInlineSurveyView');
 
 const RCTInlineSurveyView: React.FC<RCTInlineSurveyViewProps> = (props) => {

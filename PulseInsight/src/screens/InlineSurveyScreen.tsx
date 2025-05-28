@@ -23,8 +23,8 @@ const InlineSurveyScreen: React.FC<InlineSurveyScreenProps> = ({
   sdkInitialized,
   onBack,
 }) => {
-  const surveyViewName = 'inlineXibView';
-  const inlineSurveyId = 'InlineXib';
+  const surveyViewName = 'inlineView';
+  const inlineSurveyId = 'InlineTest';
   const [displaySurvey, setDisplaySurvey] = useState(false);
 
   const setViewNameSilently = useCallback(async () => {
@@ -63,6 +63,12 @@ const InlineSurveyScreen: React.FC<InlineSurveyScreenProps> = ({
   const handleSurveyFinish = useCallback(() => {
     console.log('Survey completed or closed, hiding the survey view');
     setDisplaySurvey(false);
+  }, []);
+
+  const handleContentLoaded = useCallback((event: any) => {
+    const { height, loaded } = event.nativeEvent;
+    console.log(`Survey content loaded - Height: ${height}px, Loaded: ${loaded}`);
+    // setDisplaySurvey(true);
   }, []);
 
   return (
@@ -117,6 +123,7 @@ const InlineSurveyScreen: React.FC<InlineSurveyScreenProps> = ({
             identifier={inlineSurveyId}
             style={styles.surveyComponent}
             onFinish={handleSurveyFinish}
+            onContentLoaded={handleContentLoaded}
           />
         )}
 
@@ -206,8 +213,12 @@ const styles = StyleSheet.create({
   },
   surveyComponent: {
     width: '100%',
-    height: 400,
-    backgroundColor: 'transparent',
+    height: 800,
+    marginVertical: 20,
+    backgroundColor: '#ffffff',
+    borderRadius: 4,
+    borderWidth: 1,
+    borderColor: '#dee2e6',
   },
   bottomPadding: {
     height: 40,

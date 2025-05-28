@@ -26,8 +26,6 @@ interface RCTInlineSurveyViewProps {
  * ```
  */
 
-// 使用requireNativeComponent直接引用原生组件
-// 注意：这个名称必须与原生视图管理器类的名称匹配（不包含"Manager"后缀）
 const NativeInlineSurveyView = requireNativeComponent<RCTInlineSurveyViewProps>('RCTInlineSurveyView');
 
 const RCTInlineSurveyView: React.FC<RCTInlineSurveyViewProps> = (props) => {

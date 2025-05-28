@@ -53,7 +53,7 @@
     "survey",
     "analytics"
   ],
-  "podspec": "../pulse-insight-react-native.podspec",
+  "podspec": "./pulse-insight-react-native.podspec",
   "codegenConfig": {
     "name": "PulseInsightSpec",
     "type": "modules",

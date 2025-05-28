@@ -1,140 +1,72 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Pulse Insight React Native SDK
 
-# Getting Started
+A React Native SDK for integrating Pulse Insight surveys into your mobile applications.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## Installation
 
-## Prerequisites
-
-### Java 17 Requirement
-
-This project requires **Java 17** for Android builds. You have several options to configure this:
-
-#### Option 1: Set JAVA_HOME environment variable (Recommended)
 ```bash
-# For macOS with Homebrew
-export JAVA_HOME=/opt/homebrew/Cellar/openjdk@17/17.0.11/libexec/openjdk.jdk/Contents/Home
-
-# For macOS with Oracle JDK
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home
-
-# Add to your shell profile (~/.zshrc, ~/.bash_profile, etc.) to make it permanent
-echo 'export JAVA_HOME=/path/to/your/java17' >> ~/.zshrc
+npm install pulse-insight-react-native --save
+# or
+yarn add pulse-insight-react-native
 ```
 
-#### Option 2: Use jenv (if you have multiple Java versions)
+### iOS Setup
+
+Add the following to your Podfile:
+
+```ruby
+pod 'pulse-insight-react-native', :path => '../node_modules/pulse-insight-react-native'
+```
+
+Then run:
+
 ```bash
-# Install Java 17 if not already installed
-brew install openjdk@17
-
-# Set Java 17 for this project only
-jenv local 17
+cd ios && pod install
 ```
 
-#### Option 3: Project-specific configuration
-Uncomment and modify the line in `android/gradle.properties`:
-```properties
-org.gradle.java.home=/path/to/your/java17
-```
-> **Warning**: This approach is not recommended for team projects as paths vary between developers.
+### Android Setup
 
-### Verify Java 17 Installation
-```bash
-# Check available Java versions
-/usr/libexec/java_home -V
+No additional setup required for Android.
 
-# Verify current Java version
-java -version
-```
+## Usage
 
-## Step 1: Start Metro
+```javascript
+import { PulseInsight } from 'pulse-insight-react-native';
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+// Initialize the SDK
+const pulseInsight = new PulseInsight({
+  accountId: 'YOUR_ACCOUNT_ID',
+  enableDebugMode: __DEV__, // Optional
+  previewMode: false, // Optional
+  customData: { /* Custom data */ } // Optional
+});
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+// Initialize the SDK
+await pulseInsight.initialize();
 
-```sh
-# Using npm
-npm start
+// Track an event
+pulseInsight.trackEvent('screen_view', { screen: 'Home' });
 
-# OR using Yarn
-yarn start
-```
+// Set view name
+pulseInsight.setViewName('Home');
 
-## Step 2: Build and run your app
+// Present a specific survey
+pulseInsight.presentSurvey('SURVEY_ID');
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+// Check if a survey has been answered
+const isAnswered = await pulseInsight.isSurveyAnswered('SURVEY_ID');
 
-### Android
-
-```sh
-# Using npm
-npm run android
-
-# OR using Yarn
-yarn android
+// Set custom data
+pulseInsight.setContextData({ 
+  userId: '12345',
+  userType: 'premium'
+});
 ```
 
-### iOS
+## API Reference
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+Please refer to the documentation for a complete list of available methods and options.
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+## License
 
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
-
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+MIT

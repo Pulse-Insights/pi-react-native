@@ -80,46 +80,6 @@ await sdk.setContextData({
 await sdk.clearContextData();
 ```
 
-### Inline Surveys
-
-There are two ways to implement inline surveys:
-
-#### 1. Component Approach (Recommended)
-
-Use the `PulseInsightSurvey` component directly in your JSX:
-
-```typescript
-import { PulseInsightSurvey } from 'pulse-insight-react-native';
-
-// In your component's render method:
-<View style={styles.container}>
-  <Text>Your content here</Text>
-  
-  {/* Inline survey container */}
-  <PulseInsightSurvey 
-    identifier="survey123"
-    style={{ height: 200, width: '100%' }}
-  />
-  
-  <Text>More content below the survey</Text>
-</View>
-```
-
-#### 2. Imperative API (Legacy)
-
-```typescript
-// Set the current view first
-await sdk.setViewName('DetailScreen');
-
-// Create an inline survey
-await sdk.createInlineSurvey('survey123');
-
-// Trigger the serve mechanism to display the survey
-await sdk.serve();
-```
-
-The component approach is recommended as it better follows React Native's declarative programming model.
-
 ## API Reference
 
 ### PulseInsight Class

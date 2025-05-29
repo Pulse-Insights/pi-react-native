@@ -134,36 +134,6 @@ class RCTPulseInsightModule(private val reactContext: ReactApplicationContext) :
     }
 
     @ReactMethod
-    fun createInlineSurvey(identifier: String, promise: Promise) {
-        try {
-            val pi = pulseInsights
-            if (pi == null) {
-                promise.reject("NOT_INITIALIZED", "PulseInsights SDK not initialized")
-                return
-            }
-
-            if (identifier.isEmpty()) {
-                promise.reject("EMPTY_ID", "Cannot create inline survey - Empty identifier")
-                return
-            }
-
-            currentActivity?.let { activity ->
-                pi.setContext(activity)
-                
-                // Create inline survey view
-                val inlineSurveyView = InlineSurveyView(activity, identifier)
-                
-                Log.d(TAG, "Inline survey created with identifier: $identifier")
-                promise.resolve(true)
-            } ?: promise.reject("NO_ACTIVITY", "Cannot create inline survey - No current activity")
-            
-        } catch (e: Exception) {
-            Log.e(TAG, "Failed to create inline survey", e)
-            promise.reject("CREATE_FAILED", "Failed to create inline survey", e)
-        }
-    }
-
-    @ReactMethod
     fun switchSurveyScan(enable: Boolean) {
         try {
             pulseInsights?.switchSurveyScan(enable)

@@ -18,7 +18,6 @@ import {
 } from 'react-native';
 
 import PulseInsight from './src/sdk';
-import InlineSurveyScreen from './src/screens/InlineSurveyScreen';
 
 function App(): React.JSX.Element {
   const [sdkInitialized, setSdkInitialized] = useState(false);
@@ -27,7 +26,6 @@ function App(): React.JSX.Element {
   const [clientKey, setClientKey] = useState('');
   const [surveyId, setSurveyId] = useState('');
   const [presentSurveyId, setPresentSurveyId] = useState('');
-  const [showInlineSurvey, setShowInlineSurvey] = useState(false);
   const [showContextData, setShowContextData] = useState(false);
   const [contextKey, setContextKey] = useState('');
   const [contextValue, setContextValue] = useState('');
@@ -399,16 +397,6 @@ function App(): React.JSX.Element {
       });
   };
 
-  if (showInlineSurvey) {
-    return (
-      <InlineSurveyScreen
-        sdk={pulseInsightRef.current}
-        sdkInitialized={sdkInitialized}
-        onBack={() => setShowInlineSurvey(false)}
-      />
-    );
-  }
-
   const renderContextItem = ({ item, index }: { item: { key: string, value: string }, index: number }) => (
     <View style={styles.contextItem}>
       <View style={styles.contextItemText}>
@@ -523,15 +511,6 @@ function App(): React.JSX.Element {
             disabled={!sdkInitialized}
           >
             <Text style={styles.buttonText}>Reset Device ID</Text>
-          </TouchableOpacity>
-
-          {/* Inline Survey Button */}
-          <TouchableOpacity
-            style={[styles.button, styles.inlineSurveyButton, !sdkInitialized && styles.disabledButton]}
-            onPress={() => setShowInlineSurvey(true)}
-            disabled={!sdkInitialized}
-          >
-            <Text style={styles.buttonText}>Inline Survey</Text>
           </TouchableOpacity>
         </View>
 

@@ -186,33 +186,6 @@ export class PulseInsight {
     }
   }
 
-  /**
-   * @deprecated Use the `<RCTInlineSurveyView />` component instead for a more React-native approach.
-   *
-   * Creates an inline survey with the specified identifier.
-   * This method is kept for compatibility, but it's recommended to use the declarative
-   * component approach with RCTInlineSurveyView for better integration with React Native.
-   *
-   * @example
-   * // Imperative approach (not recommended)
-   * sdk.createInlineSurvey("survey123");
-   *
-   * // Declarative approach (recommended)
-   * import { RCTInlineSurveyView } from 'pulse-insight-react-native';
-   * <RCTInlineSurveyView identifier="survey123" style={{height: 200}} />
-   *
-   * @param identifier The unique identifier for the survey
-   */
-  async createInlineSurvey(identifier: string): Promise<void> {
-    try {
-      this.ensureInitialized();
-      await RCTPulseInsight.createInlineSurvey(identifier);
-    } catch (error) {
-      console.error(`Failed to create inline survey with ID ${identifier}:`, error);
-      throw error;
-    }
-  }
-
   async setHost(hostName: string): Promise<void> {
     try {
       this.ensureInitialized();

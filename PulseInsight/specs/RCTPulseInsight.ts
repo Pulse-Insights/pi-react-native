@@ -17,8 +17,6 @@ export interface Spec extends TurboModule {
 
   present(surveyId: string): void;
 
-  createInlineSurvey(identifier: string): void;
-
   switchSurveyScan(enable: boolean): void;
   isSurveyScanWorking(): boolean;
 

@@ -1,4 +1,4 @@
-package com.pulseinsight
+package com.pulseinsight.reactnative
 
 import android.util.Log
 import com.facebook.react.common.MapBuilder

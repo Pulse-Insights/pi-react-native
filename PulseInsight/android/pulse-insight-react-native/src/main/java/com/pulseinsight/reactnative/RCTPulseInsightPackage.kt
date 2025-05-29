@@ -1,4 +1,4 @@
-package com.pulseinsight
+package com.pulseinsight.reactnative
 
 import com.facebook.react.ReactPackage
 import com.facebook.react.bridge.NativeModule

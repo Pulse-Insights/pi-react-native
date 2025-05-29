@@ -34,12 +34,16 @@ ios/.xcode.env.local
 
 # Android specific files (except necessary SDK files)
 android/build
-android/app/build
 android/.gradle
 android/local.properties
-android/app/.cxx
 android/.idea
 android/gradle
+
+# Exclude demo app completely
+android/app
+
+# Include only the library module
+!android/pulse-insight-react-native
 
 # Ruby files
 vendor

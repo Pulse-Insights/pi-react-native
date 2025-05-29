@@ -1,4 +1,4 @@
-package com.pulseinsight
+package com.pulseinsight.reactnative
 
 import android.app.Activity
 import android.util.Log

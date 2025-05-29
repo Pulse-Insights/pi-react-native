@@ -21,8 +21,8 @@ import PulseInsight from '../sdk';
 
 function App(): React.JSX.Element {
   const [sdkInitialized, setSdkInitialized] = useState(false);
-  const [accountId, setAccountId] = useState('YOUR_ACCOUNT_ID');
-  const [viewName, setViewName] = useState('YOUR_VIEW_NAME');
+  const [accountId, setAccountId] = useState('PI-71294199');
+  const [viewName, setViewName] = useState('mainActivity');
   const [clientKey, setClientKey] = useState('');
   const [surveyId, setSurveyId] = useState('');
   const [presentSurveyId, setPresentSurveyId] = useState('');
@@ -60,8 +60,8 @@ function App(): React.JSX.Element {
         setSdkInitialized(success);
 
         if (success) {
-          pulseInsightRef.current?.setHost('YOUR_HOST_URL');
-          pulseInsightRef.current?.setViewName('YOUR_VIEW_NAME');
+          pulseInsightRef.current?.setHost('survey.pulseinsights.com');
+          pulseInsightRef.current?.setViewName('mainActivity');
           console.log('SDK initialized successfully');
         } else {
           console.warn('SDK initialization failed');

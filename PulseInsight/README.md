@@ -10,6 +10,17 @@ This directory contains an example application that demonstrates how to use the 
 - `/android` - Native Android code
 - `/__tests__` - Test files for the SDK
 
+## Configuration
+
+Before running the example app, you need to replace the placeholder values with your own:
+
+1. In `/example/App.tsx`:
+   - Replace `YOUR_ACCOUNT_ID` with your Pulse Insights account ID (e.g., 'PI-12345678')
+   - Replace `YOUR_HOST_URL` with your survey host URL (e.g., 'survey.pulseinsights.com')
+   - Replace `YOUR_VIEW_NAME` with your main view name for targeting surveys
+
+These values are required for the SDK to connect to your Pulse Insights account and display surveys correctly.
+
 ## Development Environment Setup
 
 ### Prerequisites

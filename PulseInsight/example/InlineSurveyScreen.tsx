@@ -23,8 +23,8 @@ const InlineSurveyScreen: React.FC<InlineSurveyScreenProps> = ({
   sdkInitialized,
   onBack,
 }) => {
-  const surveyViewName = 'inlineView';
-  const inlineSurveyId = 'InlineTest';
+  const surveyViewName = 'YOUR_INLINE_VIEW_NAME';
+  const inlineTargetId = 'YOUR_INLINE_TARGET_ID';
   const [displaySurvey, setDisplaySurvey] = useState(false);
 
   const setViewNameSilently = useCallback(async () => {
@@ -99,7 +99,7 @@ const InlineSurveyScreen: React.FC<InlineSurveyScreenProps> = ({
         <Text style={styles.paragraph}>
           This page is using a preconfigured inline survey with:
           {'\n'}• View name: <Text style={styles.highlight}>{surveyViewName}</Text>
-          {'\n'}• Survey ID: <Text style={styles.highlight}>{inlineSurveyId}</Text>
+          {'\n'}• Inline target ID: <Text style={styles.highlight}>{inlineTargetId}</Text>
         </Text>
 
         {/* Serve Button */}
@@ -120,7 +120,7 @@ const InlineSurveyScreen: React.FC<InlineSurveyScreenProps> = ({
 
         {displaySurvey && (
           <RCTInlineSurveyView
-            identifier={inlineSurveyId}
+            identifier={inlineTargetId}
             style={styles.surveyComponent}
             onFinish={handleSurveyFinish}
             onContentLoaded={handleContentLoaded}
@@ -137,7 +137,7 @@ const InlineSurveyScreen: React.FC<InlineSurveyScreenProps> = ({
         <Text style={styles.paragraph}>
           For developers: This example demonstrates the recommended component-based approach
           using the {'<RCTInlineSurveyView>'} component. The survey is configured with
-          the identifier "{inlineSurveyId}" and will display when conditions are met.
+          the identifier "{inlineTargetId}" and will display when conditions are met.
         </Text>
 
         <View style={styles.bottomPadding} />

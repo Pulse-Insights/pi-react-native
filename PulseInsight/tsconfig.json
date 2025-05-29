@@ -17,7 +17,7 @@
     "lib",
     "ios",
     "android",
-    "App.tsx",
+    "src/screens/App.tsx",
     "src/screens/**/*",
     "src/components/**/*"
   ]

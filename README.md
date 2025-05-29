@@ -1,6 +1,20 @@
 # Pulse Insight React Native SDK
 
-A React Native SDK for integrating Pulse Insight surveys into your mobile applications.
+A React Native SDK for integrating Pulse Insight surveys into your mobile applications. This SDK provides a React Native wrapper around our native iOS and Android SDKs.
+
+## Native SDKs
+
+This React Native SDK is built on top of our native SDKs:
+- [Android SDK](https://github.com/Pulse-Insights/pi.android)
+- [iOS SDK](https://github.com/Pulse-Insights/pi-ios-spm)
+
+## Project Structure
+
+- `/PulseInsight` - Contains the example app and SDK implementation
+  - `/sdk` - The actual SDK core implementation
+  - `/example` - Example app source code
+  - `/ios` and `/android` - Native code for iOS and Android platforms
+  - `/specs` - Test specifications
 
 ## Installation
 
@@ -65,7 +79,7 @@ pulseInsight.setContextData({
 
 ## API Reference
 
-Please refer to the documentation for a complete list of available methods and options.
+For detailed API documentation, please refer to the [README-SDK.md](/PulseInsight/sdk/README.md) file.
 
 ## License
 

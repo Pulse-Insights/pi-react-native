@@ -1,72 +1,87 @@
-# Pulse Insight React Native SDK
+# Pulse Insight React Native Example
 
-A React Native SDK for integrating Pulse Insight surveys into your mobile applications.
+This directory contains an example application that demonstrates how to use the Pulse Insight React Native SDK, as well as the SDK implementation itself.
 
-## Installation
+## Directory Structure
+
+- `/sdk` - The SDK core implementation
+- `/example` - Example application source code
+- `/ios` - Native iOS code
+- `/android` - Native Android code
+- `/__tests__` - Test files for the SDK
+
+## Development Environment Setup
+
+### Prerequisites
+
+- Node.js (v16 or later)
+- Yarn or npm
+- For iOS development:
+  - macOS
+  - Xcode (14.0 or later)
+  - CocoaPods
+- For Android development:
+  - Android Studio
+  - JDK 11 or newer
+  - Android SDK (API level 21 or higher)
+
+### Installing Dependencies
 
 ```bash
-npm install pulse-insight-react-native --save
+# Install JavaScript dependencies
+yarn install
 # or
-yarn add pulse-insight-react-native
+npm install
+
+# Install iOS dependencies
+cd ios && pod install && cd ..
 ```
 
-### iOS Setup
+## Running the Example App
 
-Add the following to your Podfile:
-
-```ruby
-pod 'pulse-insight-react-native', :path => '../node_modules/pulse-insight-react-native'
-```
-
-Then run:
+### iOS
 
 ```bash
-cd ios && pod install
+# Start Metro bundler
+npx react-native start
+
+# Run on iOS simulator
+npx react-native run-ios
 ```
 
-### Android Setup
+### Android
 
-No additional setup required for Android.
+```bash
+# Start Metro bundler
+npx react-native start
 
-## Usage
-
-```javascript
-import { PulseInsight } from 'pulse-insight-react-native';
-
-// Initialize the SDK
-const pulseInsight = new PulseInsight({
-  accountId: 'YOUR_ACCOUNT_ID',
-  enableDebugMode: __DEV__, // Optional
-  previewMode: false, // Optional
-  customData: { /* Custom data */ } // Optional
-});
-
-// Initialize the SDK
-await pulseInsight.initialize();
-
-// Track an event
-pulseInsight.trackEvent('screen_view', { screen: 'Home' });
-
-// Set view name
-pulseInsight.setViewName('Home');
-
-// Present a specific survey
-pulseInsight.presentSurvey('SURVEY_ID');
-
-// Check if a survey has been answered
-const isAnswered = await pulseInsight.isSurveyAnswered('SURVEY_ID');
-
-// Set custom data
-pulseInsight.setContextData({ 
-  userId: '12345',
-  userType: 'premium'
-});
+# Run on Android emulator or device
+npx react-native run-android
 ```
 
-## API Reference
+## Making Changes to the SDK
 
-Please refer to the documentation for a complete list of available methods and options.
+The SDK code is located in the `/sdk` directory. To modify the SDK:
+
+1. Make changes to the SDK source code in the `/sdk` directory
+2. Test your changes in the example app
+3. Run the test suite to verify functionality:
+   ```bash
+   yarn test
+   # or
+   npm test
+   ```
+
+## Building for Production
+
+To build a production-ready version of the SDK, run:
+
+```bash
+yarn build
+# or
+npm run build
+```
 
 ## License
 
-MIT
+MIT 

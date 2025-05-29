@@ -36,6 +36,23 @@ These values are required for the SDK to connect to your Pulse Insights account 
   - JDK 11 or newer
   - Android SDK (API level 21 or higher)
 
+### Android-specific Setup
+
+Before building the Android app, you need to configure the local properties:
+
+1. Navigate to the `/android` directory
+2. Copy the `local.properties.example` file to `local.properties`
+3. Edit the `local.properties` file and update the Android SDK path to match your system:
+   ```properties
+   sdk.dir=/path/to/your/Android/sdk
+   ```
+   Common locations:
+   - macOS: `/Users/YOUR_USERNAME/Library/Android/sdk`
+   - Windows: `C:\Users\YOUR_USERNAME\AppData\Local\Android\sdk`
+   - Linux: `/home/YOUR_USERNAME/Android/sdk`
+
+4. If you're using Java 17, uncomment and update the Java home path in the same file
+
 ### Installing Dependencies
 
 ```bash

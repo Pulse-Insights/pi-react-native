@@ -79,7 +79,7 @@ pulseInsight.setContextData({
 
 ## API Reference
 
-For detailed API documentation, please refer to the [README-SDK.md](/PulseInsight/sdk/README.md) file.
+For detailed API documentation, please refer to the [SDK README](/PulseInsight/sdk/README.md) file.
 
 ## License
 

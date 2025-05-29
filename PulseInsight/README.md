@@ -59,29 +59,6 @@ npx react-native start
 npx react-native run-android
 ```
 
-## Making Changes to the SDK
-
-The SDK code is located in the `/sdk` directory. To modify the SDK:
-
-1. Make changes to the SDK source code in the `/sdk` directory
-2. Test your changes in the example app
-3. Run the test suite to verify functionality:
-   ```bash
-   yarn test
-   # or
-   npm test
-   ```
-
-## Building for Production
-
-To build a production-ready version of the SDK, run:
-
-```bash
-yarn build
-# or
-npm run build
-```
-
 ## License
 
 MIT 

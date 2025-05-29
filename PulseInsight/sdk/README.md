@@ -29,13 +29,16 @@ await pulseInsight.initialize();
 ### Survey Management
 
 ```javascript
+// Check for available surveys and display them if conditions are met
+pulseInsight.serve();
+
 // Track an event
 pulseInsight.trackEvent('screen_view', { screen: 'Home' });
 
-// Set view name
+// Set view name (for targeting surveys to specific screens)
 pulseInsight.setViewName('Home');
 
-// Present a specific survey
+// Present a specific survey by ID
 pulseInsight.presentSurvey('SURVEY_ID');
 
 // Check if a survey has been answered
@@ -53,6 +56,66 @@ pulseInsight.setContextData({
 
 // Clear context data
 pulseInsight.clearContextData();
+```
+
+### Configuration
+
+```javascript
+// Enable/disable debug mode
+pulseInsight.setDebugMode(true);
+
+// Enable/disable preview mode
+pulseInsight.setPreviewMode(true);
+
+// Set survey scan frequency (in seconds)
+pulseInsight.setScanFrequency(30);
+
+// Set client key
+pulseInsight.setClientKey('YOUR_CLIENT_KEY');
+```
+
+### Advanced
+
+```javascript
+// Set custom host
+pulseInsight.setHost('custom-survey.yourdomain.com');
+
+// Set device data
+pulseInsight.setDeviceData({
+  deviceModel: 'iPhone 16',
+  osVersion: '17.0',
+  appVersion: '1.2.3'
+});
+
+// Reset device ID
+pulseInsight.resetDeviceId();
+
+// Check if survey rendering is active
+const isActive = pulseInsight.isSurveyRenderingActive();
+
+// Switch survey scan on/off
+pulseInsight.switchSurveyScan(true);
+```
+
+### Event Listeners
+
+```javascript
+// Set answer listener
+pulseInsight.setAnswerListener((answerId) => {
+  console.log(`Survey answered with ID: ${answerId}`);
+});
+```
+
+## Inline Survey Component
+
+```javascript
+import { InlineSurvey } from 'pulse-insight-react-native';
+
+// In your render method
+<InlineSurvey
+  identifier="SURVEY_ID"
+  style={{ width: '100%', height: 300 }}
+/>
 ```
 
 ## Development

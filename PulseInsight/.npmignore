@@ -42,8 +42,9 @@ android/gradle
 # Exclude demo app completely
 android/app
 
-# Include only the library module
+# Include only the library module source code, not build artifacts
 !android/pulse-insight-react-native
+android/pulse-insight-react-native/build
 
 # Ruby files
 vendor

@@ -6,6 +6,7 @@ src/*
 App.tsx
 src/screens
 src/components
+example/
 
 # Development files
 .watchmanconfig
@@ -13,6 +14,8 @@ __tests__
 metro.config.js
 babel.config.js
 jest.config.js
+index.js
+app.json
 
 # Build and cache files
 node_modules
@@ -32,6 +35,11 @@ ios/PulseInsight.xcworkspace
 ios/.xcode.env
 ios/.xcode.env.local
 
+# Exclude demo iOS app files
+ios/PulseInsight/
+ios/Podfile
+ios/Podfile.lock
+
 # Android specific files (except necessary SDK files)
 android/build
 android/.gradle
@@ -42,10 +50,20 @@ android/gradle
 # Exclude demo app completely
 android/app
 
-# Include only the library module source code, not build artifacts
-!android/pulse-insight-react-native
-android/pulse-insight-react-native/build
+# Exclude top-level Android config files (these are for the demo)
+android/settings.gradle
+android/gradle.properties
+android/gradlew*
+android/local.properties*
+android/gradle-local.properties*
+
+# Include only the library module source code
+!android/src
+!android/build.gradle
 
 # Ruby files
 vendor
-.ruby-lsp 
+.ruby-lsp
+.bundle
+Gemfile
+Gemfile.lock 

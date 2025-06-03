@@ -16,6 +16,7 @@
 		BB07E32E2DDB0CDF00E0810A /* RCTPulseInsight.m in Sources */ = {isa = PBXBuildFile; fileRef = BB07E32D2DDB0CDF00E0810A /* RCTPulseInsight.m */; };
 		BB07E3602DDC80A900E0810A /* RCTInlineSurveyViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB07E35F2DDC80A900E0810A /* RCTInlineSurveyViewManager.swift */; };
 		BB07E3622DDC80F800E0810A /* RCTInlineSurveyViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BB07E3612DDC80F800E0810A /* RCTInlineSurveyViewManager.m */; };
+		BB4B8C672DE9B26200A088D0 /* PulseInsights in Frameworks */ = {isa = PBXBuildFile; productRef = BB4B8C662DE9B26200A088D0 /* PulseInsights */; };
 		EAA0E94414A431F548015311 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB4B8C672DE9B26200A088D0 /* PulseInsights in Frameworks */,
 				0C80B921A6F3F58F76C31292 /* libPods-PulseInsight.a in Frameworks */,
 				BB07E3202DD7585500E0810A /* PulseInsights in Frameworks */,
 			);
@@ -163,7 +165,7 @@
 			);
 			mainGroup = 83CBB9F61A601CBA00E9B192;
 			packageReferences = (
-				BB07E31E2DD7585500E0810A /* XCRemoteSwiftPackageReference "pi-ios-spm" */,
+				BB4B8C652DE9B26200A088D0 /* XCRemoteSwiftPackageReference "pi-ios-spm" */,
 			);
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
@@ -514,12 +516,25 @@
 				minimumVersion = 1.0.9;
 			};
 		};
+		BB4B8C652DE9B26200A088D0 /* XCRemoteSwiftPackageReference "pi-ios-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Pulse-Insights/pi-ios-spm";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.10;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		BB07E31F2DD7585500E0810A /* PulseInsights */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = BB07E31E2DD7585500E0810A /* XCRemoteSwiftPackageReference "pi-ios-spm" */;
+			productName = PulseInsights;
+		};
+		BB4B8C662DE9B26200A088D0 /* PulseInsights */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB4B8C652DE9B26200A088D0 /* XCRemoteSwiftPackageReference "pi-ios-spm" */;
 			productName = PulseInsights;
 		};
 /* End XCSwiftPackageProductDependency section */

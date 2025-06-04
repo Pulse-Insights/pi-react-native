@@ -1,6 +1,6 @@
 {
   "name": "pulse-insight-react-native",
-  "version": "0.1.14",
+  "version": "0.1.16",
   "description": "React Native SDK for PulseInsight",
   "main": "lib/src/sdk/index.js",
   "types": "lib/src/sdk/index.d.ts",
@@ -21,6 +21,7 @@
     "@babel/core": "^7.25.2",
     "@babel/preset-env": "^7.25.3",
     "@babel/runtime": "^7.25.0",
+    "@react-native-community/cli": "^18.0.0",
     "@react-native/babel-preset": "0.79.2",
     "@react-native/eslint-config": "0.79.2",
     "@react-native/metro-config": "0.79.2",
@@ -48,12 +49,12 @@
   "engines": {
     "node": ">=18"
   },
-  "homepage": "https://github.com/Pulse-Insights/pi-react-native-sdk",
+  "homepage": "https://github.com/Pulse-Insights/pi-react-native",
   "author": "Pulse Insights",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Pulse-Insights/pi-react-native-sdk.git"
+    "url": "git+https://github.com/Pulse-Insights/pi-react-native.git"
   },
   "keywords": [
     "react-native",

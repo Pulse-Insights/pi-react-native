@@ -16,21 +16,13 @@ Pod::Spec.new do |s|
   
   # React Native bridge files
   s.source_files     = "ios/**/*.{h,m,mm,swift}"
-  s.dependency "PulseInsightsSPM", "~> 1.0.11"
+  s.dependency "PulseInsightsSPM", "~> 1.0.12"
   
   s.requires_arc     = true
   s.swift_version    = '5.0'
   
   # React Native dependencies
   s.dependency "React-Core"
-  
-  # Setup message
-  puts ""
-  puts "✅ PulseInsights React Native v#{s.version}"
-  puts "   Using PulseInsightsSPM ~> 1.0.11"
-  puts ""
-  puts "🚀 Installation: Just run 'pod install' - no additional setup required!"
-  puts ""
   
   # React Native new architecture
   if respond_to?(:install_modules_dependencies, true)

@@ -17,7 +17,7 @@ end
 target 'PulseInsight' do
   config = use_native_modules!
 
-  pod 'PulseInsightsSPM', '~> 1.0.12'
+  pod 'PulseInsightsSPM', '~> 1.0.13'
 
   use_react_native!(
     :path => config[:reactNativePath],

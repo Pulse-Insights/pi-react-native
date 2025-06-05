@@ -1,6 +1,6 @@
 {
   "name": "pulse-insight-react-native",
-  "version": "0.1.17",
+  "version": "0.1.18",
   "description": "React Native SDK for PulseInsight",
   "main": "lib/src/sdk/index.js",
   "types": "lib/src/sdk/index.d.ts",

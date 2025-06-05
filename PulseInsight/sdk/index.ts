@@ -54,17 +54,16 @@ export class PulseInsight {
     }
   }
 
-  async trackEvent(eventName: string, properties: Record<string, any> = {}): Promise<void> {
+  async setDeviceData(properties: Record<string, string> = {}): Promise<void> {
     try {
       this.ensureInitialized();
       await RCTPulseInsight.setDeviceData(properties);
-      console.log(`Event tracked: ${eventName}`, properties);
+      console.log(`DeviceData updated: ${properties}`);
     } catch (error) {
-      console.error(`Failed to track event ${eventName}:`, error);
+      console.error('Failed to set device data:', error);
     }
   }
 
-  // View tracking
   async setViewName(viewName: string): Promise<void> {
     try {
       this.ensureInitialized();

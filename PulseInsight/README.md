@@ -67,7 +67,7 @@ Before building the Android app, you need to configure the local properties:
    - Windows: `C:\Users\YOUR_USERNAME\AppData\Local\Android\sdk`
    - Linux: `/home/YOUR_USERNAME/Android/sdk`
 
-4. If you're using Java 17, uncomment and update the Java home path in the same file
+4. If you're using Java 17, go to gradle.properties and update the java.home path to the path of your Java 17 installation.
 
 5. **Important**: The PulseInsights Android SDK is hosted in a custom Maven repository. This repository is configured in the example app, but if you're integrating into your own app, you'll need to add the repository to your project's build configuration:
 

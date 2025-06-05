@@ -49,9 +49,6 @@ await pulseInsight.setViewName('home_screen');
 // Check for available surveys and display them if conditions are met
 await pulseInsight.serve();
 
-// Track an event
-await pulseInsight.trackEvent('screen_view', { screen: 'Home' });
-
 // Present a specific survey by ID
 await pulseInsight.presentSurvey('SURVEY_ID');
 

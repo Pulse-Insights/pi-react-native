@@ -62,6 +62,18 @@ dependencies {
 }
 ```
 
+## Example Application
+
+For a complete implementation example of the Pulse Insight React Native SDK, please refer to the example application in the `/PulseInsight` directory. The main README.md file in that directory contains:
+
+- Detailed setup instructions
+- Configuration guidelines
+- Example code
+- Troubleshooting tips
+- Environment setup for both iOS and Android
+
+This example demonstrates best practices for integrating the SDK into your React Native application.
+
 ## Usage
 
 ### Basic Integration

@@ -38,6 +38,7 @@ await pulseInsight.setViewName('YOUR_VIEW_NAME');
 
 // Now you can call serve() or presentSurvey()
 await pulseInsight.serve();
+await pulseInsight.presentSurvey('SURVEY_ID');
 ```
 
 ### Survey Management

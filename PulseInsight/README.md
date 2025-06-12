@@ -4,22 +4,11 @@ This directory contains an example application that demonstrates how to use the 
 
 ## Directory Structure
 
-- `/sdk` - The SDK core implementation
+- [/sdk](./sdk) - The SDK core implementation
 - `/example` - Example application source code
 - `/ios` - Native iOS code
 - `/android` - Native Android code
 - `/__tests__` - Test files for the SDK
-
-## Configuration
-
-Before running the example app, you need to replace the placeholder values with your own:
-
-1. In `/example/App.tsx`:
-   - Replace `YOUR_ACCOUNT_ID` with your Pulse Insights account ID (e.g., 'PI-12345678')
-   - Replace `YOUR_HOST_URL` with your survey host URL (e.g., 'survey.pulseinsights.com')
-   - Replace `YOUR_VIEW_NAME` with your main view name for targeting surveys
-
-These values are required for the SDK to connect to your Pulse Insights account and display surveys correctly.
 
 ## Development Environment Setup
 
@@ -30,7 +19,8 @@ These values are required for the SDK to connect to your Pulse Insights account 
 - For iOS development:
   - macOS
   - Xcode (14.0 or later)
-  - CocoaPods
+  - Ruby (2.6 or later - macOS comes with Ruby pre-installed)
+  - CocoaPods (installed via `sudo gem install cocoapods`)
 - For Android development:
   - Android Studio
   - JDK 11 or newer
@@ -83,7 +73,24 @@ Before building the Android app, you need to configure the local properties:
    }
    ```
 
-### Installing Dependencies
+## Quick Start
+
+Here are the complete steps to run the example application from scratch:
+
+### 1. Clone the Repository
+
+```bash
+# Clone the repository
+git clone https://github.com/your-org/pi-react-native.git
+
+# Navigate to the project root directory
+cd pi-react-native
+
+# Navigate to the PulseInsight directory
+cd PulseInsight
+```
+
+### 2. Install Dependencies
 
 ```bash
 # Install JavaScript dependencies
@@ -91,30 +98,53 @@ yarn install
 # or
 npm install
 
-# Install iOS dependencies
+# Install iOS dependencies (macOS only)
 cd ios && pod install && cd ..
 ```
 
-## Running the Example App
+> **Note for iOS Development**: The iOS setup requires [CocoaPods](https://cocoapods.org/) which is a Ruby-based dependency manager. If you don't have CocoaPods installed:
+> 
+> 1. Ensure you have Ruby installed (macOS comes with Ruby pre-installed)
+> 2. Install CocoaPods by running: `sudo gem install cocoapods`
+> 3. If you encounter Ruby version issues, consider using a Ruby version manager like [rbenv](https://github.com/rbenv/rbenv) or [RVM](https://rvm.io/)
+> 
+> For more information, visit the [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html)
 
-### iOS
+### 3. Configure the Application
+
+Before running, you need to configure the example app:
+
+1. Open the file `PulseInsight/example/App.tsx` 
+2. Find and replace the placeholder values:
+   ```javascript
+   // Replace YOUR_ACCOUNT_ID with your actual account ID (e.g., 'PI-12345678')
+   const pulseInsight = new PulseInsight({
+     accountId: 'YOUR_ACCOUNT_ID',
+     // ...
+   });
+   
+   // Replace YOUR_HOST_URL with your actual host URL (e.g., 'survey.pulseinsights.com')
+   pulseInsight.setHost('YOUR_HOST_URL');
+   
+   // Replace YOUR_VIEW_NAME with your actual view name for targeting surveys
+   pulseInsight.setViewName('YOUR_VIEW_NAME');
+   ```
+
+### 4. Run the Application
 
 ```bash
-# Start Metro bundler
-npx react-native start
+# Make sure you're in the PulseInsight directory
+cd PulseInsight  # If you're not already in this directory
 
-# Run on iOS simulator
+# For iOS (macOS only)
 npx react-native run-ios
-```
+# or
+yarn ios
 
-### Android
-
-```bash
-# Start Metro bundler
-npx react-native start
-
-# Run on Android emulator or device
+# For Android
 npx react-native run-android
+# or
+yarn android
 ```
 
 ## Troubleshooting

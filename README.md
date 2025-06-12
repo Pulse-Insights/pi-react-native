@@ -2,6 +2,50 @@
 
 React Native SDK for integrating PulseInsights surveys into mobile applications.
 
+## Getting Started
+
+This repository contains both the SDK for integration into your own apps and a complete example application that demonstrates proper implementation.
+
+### For Beginners (New to React Native)
+If you're new to React Native or mobile development:
+
+1. **Start with the Example App**: Explore the example application in the `/PulseInsight` directory first
+2. Follow the setup instructions in [PulseInsight/README.md](PulseInsight/README.md) to run the example
+3. Examine how the SDK is implemented in `/PulseInsight/example/App.tsx`
+
+### For Experienced Developers
+If you're familiar with React Native and just want to integrate the SDK:
+
+1. Follow the installation steps below
+2. Review the usage examples in this README
+3. Refer to the full API documentation in [PulseInsight/sdk/README.md](PulseInsight/sdk/README.md)
+
+### Repository Structure
+
+The following diagram shows the organization of this repository:
+
+```mermaid
+graph TD
+    A["PulseInsight React Native SDK"] --> B["SDK Core</br>/PulseInsight/sdk"]
+    A --> C["Example App</br>/PulseInsight/example"]
+    A --> D["Documentation</br>README.md files"]
+    
+    B --> B1["API Reference</br>/sdk/README.md"]
+    B --> B2["Components</br>/sdk/components"]
+    
+    C --> C1["App Implementation</br>App.tsx"]
+    C --> C2["Native Code</br>/ios & /android"]
+    
+    D --> D1["Main README</br>(Installation & Usage)"]
+    D --> D2["Example App README</br>(Running the example)"]
+    D --> D3["SDK README</br>(API Reference)"]
+    
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style B fill:#bbf,stroke:#333
+    style C fill:#bfb,stroke:#333
+    style D fill:#fbb,stroke:#333
+```
+
 ## Installation
 
 ### npm
@@ -64,15 +108,17 @@ dependencies {
 
 ## Example Application
 
-For a complete implementation example of the Pulse Insight React Native SDK, please refer to the example application in the `/PulseInsight` directory. The main README.md file in that directory contains:
+For a complete implementation example of the Pulse Insight React Native SDK, please refer to the example application in the `/PulseInsight` directory.
 
-- Detailed setup instructions
-- Configuration guidelines
-- Example code
-- Troubleshooting tips
-- Environment setup for both iOS and Android
+To run and understand the example application:
 
-This example demonstrates best practices for integrating the SDK into your React Native application.
+1. Follow the detailed setup instructions in [PulseInsight/README.md](PulseInsight/README.md)
+2. Examine the implementation in `/PulseInsight/example/App.tsx`
+3. Reference the API documentation in [PulseInsight/sdk/README.md](PulseInsight/sdk/README.md)
+
+The example demonstrates all aspects of SDK integration including initialization, survey triggering, context data management, and best practices for real-world implementation.
+
+> **Note:** Before running the example, you'll need to configure it with your account details as described in [PulseInsight/README.md](PulseInsight/README.md).
 
 ## Usage
 

@@ -1,5 +1,7 @@
 # Pulse Insight React Native SDK Core
 
+> **Note for beginners:** If you're new to React Native or mobile development, we recommend starting with the example application in [/PulseInsight/example](../example) directory. The [example README](../README.md) provides step-by-step instructions for getting started.
+
 This directory contains the core implementation of the Pulse Insight React Native SDK.
 
 ## Structure

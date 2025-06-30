@@ -61,7 +61,7 @@ function App(): React.JSX.Element {
 
         if (success) {
           pulseInsightRef.current?.setHost('YOUR_HOST_URL');
-          pulseInsightRef.current?.setViewName('YOUR_VIEW_NAME');
+          pulseInsightRef.current?.setViewName(viewName);
           console.log('SDK initialized successfully');
         } else {
           console.warn('SDK initialization failed');
@@ -73,7 +73,7 @@ function App(): React.JSX.Element {
     }
 
     initSDK();
-  }, [accountId]); // Only re-initialize when accountId changes
+  }, [accountId, viewName]);
 
   const saveAccountId = () => {
     if (!pulseInsightRef.current || !sdkInitialized) {

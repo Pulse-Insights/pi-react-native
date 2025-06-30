@@ -71,12 +71,26 @@ class RCTPulseInsight: NSObject {
   
   @objc
   func serve() {
-    PulseInsights.getInstance.serve()
+    DispatchQueue.main.async {
+      if let viewController = self.currentViewControllerFromBridge() {
+        PulseInsights.getInstance.setViewController(viewController)
+        PulseInsights.getInstance.serve()
+      } else {
+        print("RCTPulseInsight: Cannot serve survey - No view controller available")
+      }
+    }
   }
   
   @objc
   func present(_ surveyId: String) {
-    PulseInsights.getInstance.present(surveyId)
+    DispatchQueue.main.async {
+      if let viewController = self.currentViewControllerFromBridge() {
+        PulseInsights.getInstance.setViewController(viewController)
+        PulseInsights.getInstance.present(surveyId)
+      } else {
+        print("RCTPulseInsight: Cannot present survey - No view controller available")
+      }
+    }
   }
   
   @objc

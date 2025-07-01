@@ -11,8 +11,7 @@
       android:roundIcon="@mipmap/ic_launcher_round"
       android:allowBackup="false"
       android:theme="@style/AppTheme"
-      android:supportsRtl="true"
-      tools:replace="android:allowBackup,android:theme">
+      android:supportsRtl="true">
       
       <!-- Required for Pulse Insights SDK on API level 28+ -->
       <uses-library

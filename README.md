@@ -191,32 +191,6 @@ For more detailed examples and a complete implementation, see the [Example App](
 - Check that Android SDK is properly configured
 - If you see "Could not find com.pulseinsights:android-sdk", verify you've added the Maven repository as shown in the Android Setup section
 
-#### AndroidManifest Conflicts
-If you see errors like:
-```
-Attribute application@allowBackup value=(false) is also present at [com.pulseinsights:android-sdk:2.4.4] AndroidManifest.xml value=(true).
-Attribute application@theme value=(@style/AppTheme) is also present at [com.pulseinsights:android-sdk:2.4.4] AndroidManifest.xml value=(@style/Theme.Surveysdk).
-```
-
-Add a `tools:replace` directive in your app's AndroidManifest.xml:
-
-```xml
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.yourapp">
-
-    <application
-        android:allowBackup="true"
-        android:theme="@style/AppTheme"
-        tools:replace="android:allowBackup,android:theme"
-        ...>
-        
-        <!-- Your activities and other components -->
-        
-    </application>
-</manifest>
-```
-
 #### Apache HTTP Legacy Library
 If you encounter `java.lang.NoClassDefFoundError: Failed resolution of: Lorg/apache/http/HttpResponse`, add the Apache HTTP legacy library to your AndroidManifest.xml:
 

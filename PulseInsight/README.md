@@ -1,178 +1,220 @@
-# Pulse Insight React Native Example
+# Pulse Insight React Native SDK
 
-This directory contains an example application that demonstrates how to use the Pulse Insight React Native SDK, as well as the SDK implementation itself.
+A React Native SDK for integrating PulseInsight surveys into your mobile applications.
 
-## Directory Structure
-
-- [/sdk](./sdk) - The SDK core implementation
-- `/example` - Example application source code
-- `/ios` - Native iOS code
-- `/android` - Native Android code
-- `/__tests__` - Test files for the SDK
-
-## Development Environment Setup
-
-### Prerequisites
-
-- Node.js (v16 or later)
-- Yarn or npm
-- For iOS development:
-  - macOS
-  - Xcode (14.0 or later)
-  - Ruby (2.6 or later - macOS comes with Ruby pre-installed)
-  - CocoaPods (installed via `sudo gem install cocoapods`)
-- For Android development:
-  - Android Studio
-  - JDK 11 or newer
-  - Android SDK (API level 21 or higher)
-
-### iOS-specific Setup
-
-The SDK uses CocoaPods to manage dependencies:
-
-1. Make sure you have CocoaPods installed:
-   ```bash
-   sudo gem install cocoapods
-   ```
-
-2. If you encounter any module issues, try cleaning the CocoaPods cache:
-   ```bash
-   pod cache clean --all
-   ```
-
-3. Do NOT manually add PulseInsights as an SPM package in Xcode - the SDK now exclusively uses CocoaPods for dependency management.
-
-### Android-specific Setup
-
-Before building the Android app, you need to configure the local properties:
-
-1. Navigate to the `/android` directory
-2. Copy the `local.properties.example` file to `local.properties`
-3. Edit the `local.properties` file and update the Android SDK path to match your system:
-   ```properties
-   sdk.dir=/path/to/your/Android/sdk
-   ```
-   Common locations:
-   - macOS: `/Users/YOUR_USERNAME/Library/Android/sdk`
-   - Windows: `C:\Users\YOUR_USERNAME\AppData\Local\Android\sdk`
-   - Linux: `/home/YOUR_USERNAME/Android/sdk`
-
-4. If you're using Java 17, go to gradle.properties and update the java.home path to the path of your Java 17 installation.
-
-5. **Important**: The PulseInsights Android SDK is hosted in a custom Maven repository. This repository is configured in the example app, but if you're integrating into your own app, you'll need to add the repository to your project's build configuration:
-
-   ```gradle
-   // In your project's root build.gradle or settings.gradle
-   allprojects {
-       repositories {
-           // ... other repositories
-           maven {
-               url "https://pi-sdk.s3.us-east-1.amazonaws.com/android"
-           }
-       }
-   }
-   ```
-
-## Quick Start
-
-Here are the complete steps to run the example application from scratch:
-
-### 1. Clone the Repository
+## Installation
 
 ```bash
-# Clone the repository
-git clone https://github.com/your-org/pi-react-native.git
-
-# Navigate to the project root directory
-cd pi-react-native
-
-# Navigate to the PulseInsight directory
-cd PulseInsight
-```
-
-### 2. Install Dependencies
-
-```bash
-# Install JavaScript dependencies
-yarn install
+npm install pulse-insight-react-native --save
 # or
-npm install
-
-# Install iOS dependencies (macOS only)
-cd ios && pod install && cd ..
+yarn add pulse-insight-react-native
 ```
 
-> **Note for iOS Development**: The iOS setup requires [CocoaPods](https://cocoapods.org/) which is a Ruby-based dependency manager. If you don't have CocoaPods installed:
-> 
-> 1. Ensure you have Ruby installed (macOS comes with Ruby pre-installed)
-> 2. Install CocoaPods by running: `sudo gem install cocoapods`
-> 3. If you encounter Ruby version issues, consider using a Ruby version manager like [rbenv](https://github.com/rbenv/rbenv) or [RVM](https://rvm.io/)
-> 
-> For more information, visit the [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html)
+## Requirements
 
-### 3. Configure the Application
+- React Native >= 0.70.0
+- iOS 14.0+
+- Android API level 21+
+- Java 17 for Android development
 
-Before running, you need to configure the example app:
+## Development Requirements
 
-1. Open the file `PulseInsight/example/App.tsx` 
-2. Find and replace the placeholder values:
-   ```javascript
-   // Replace YOUR_ACCOUNT_ID with your actual account ID (e.g., 'PI-12345678')
-   const pulseInsight = new PulseInsight({
-     accountId: 'YOUR_ACCOUNT_ID',
-     // ...
-   });
+### Java 17 Setup for Android Development
+
+This project requires Java 17 for Android development. You can set up Java 17 in one of the following ways:
+
+1. **Using jenv (recommended)**:
+   ```bash
+   # Install jenv if you haven't already
+   brew install jenv
    
-   // Replace YOUR_HOST_URL with your actual host URL (e.g., 'survey.pulseinsights.com')
-   pulseInsight.setHost('YOUR_HOST_URL');
+   # Add Java 17 to jenv
+   jenv add /path/to/your/java17
    
-   // Replace YOUR_VIEW_NAME with your actual view name for targeting surveys
-   pulseInsight.setViewName('YOUR_VIEW_NAME');
+   # Set Java 17 for this project only
+   cd /path/to/project/root
+   jenv local 17.0.11
    ```
+   
+   Note: The `.java-version` file is included in the repository, so if you have jenv installed, it will automatically switch to Java 17 when you enter the project directory.
 
-### 4. Run the Application
-
-```bash
-# Make sure you're in the PulseInsight directory
-cd PulseInsight  # If you're not already in this directory
-
-# For iOS (macOS only)
-npx react-native run-ios
-# or
-yarn ios
-
-# For Android
-npx react-native run-android
-# or
-yarn android
-```
-
-## Troubleshooting
-
-### iOS Build Issues
-
-If you encounter build errors related to missing modules:
-
-1. Make sure you're using CocoaPods and not SPM for dependency management
-2. Clean the CocoaPods cache and reinstall:
+2. **Setting JAVA_HOME environment variable before building**:
    ```bash
-   cd ios
-   pod cache clean --all
-   pod install
-   ```
-3. Clean the Xcode build folder (Product > Clean Build Folder)
-4. Restart Xcode
-
-### Android Build Issues
-
-If you see errors like "Could not find com.pulseinsights:android-sdk:2.4.4":
-
-1. Make sure you've added the PulseInsights Maven repository to your project's build configuration as described in the Android-specific Setup section
-2. Clean and rebuild your project:
-   ```bash
+   export JAVA_HOME=/path/to/your/java17
    cd android
-   ./gradlew clean
+   ./gradlew build
    ```
+
+3. **Adding Java path directly to gradle.properties**:
+   If the above methods don't work for you, you can add the Java 17 path directly to `android/gradle.properties`:
+   ```
+   org.gradle.java.home=/path/to/your/java17
+   ```
+
+## Features
+
+- Display PulseInsight surveys in your React Native application
+- Support for both popup and inline survey formats
+- Customizable survey appearance
+- Comprehensive API for survey management
+- Cross-platform support (iOS and Android)
+
+## Usage
+
+### Basic Setup
+
+```javascript
+import PulseInsight from 'pulse-insight-react-native';
+
+// Initialize the SDK
+const pulseInsight = new PulseInsight({
+  accountId: 'YOUR_ACCOUNT_ID',
+  enableDebugMode: __DEV__, // Optional: Enable debug mode in development
+  previewMode: false, // Optional: Enable preview mode for testing
+  customData: {
+    // Optional: Add custom data for survey targeting
+    userType: 'premium',
+    appVersion: '1.0.0',
+  },
+});
+
+// Initialize the SDK
+await pulseInsight.initialize();
+
+// Set the current view name (for targeting surveys)
+pulseInsight.setViewName('HomeScreen');
+
+// Serve surveys (check if any surveys should be displayed)
+pulseInsight.serve();
+```
+
+### Inline Survey Component
+
+```javascript
+import { RCTInlineSurveyView } from 'pulse-insight-react-native';
+
+function SurveyScreen() {
+  return (
+    <View style={styles.container}>
+      <RCTInlineSurveyView
+        identifier="YOUR_SURVEY_ID"
+        style={{ height: 400, width: '100%' }}
+        onFinish={(event) => {
+          console.log('Survey completed:', event.nativeEvent.success);
+        }}
+        onContentLoaded={(event) => {
+          console.log('Content height:', event.nativeEvent.height);
+        }}
+      />
+    </View>
+  );
+}
+```
+
+### Advanced Usage
+
+```javascript
+// Set custom context data for survey targeting
+pulseInsight.setContextData({
+  userSegment: 'premium',
+  region: 'US',
+}, true); // true to merge with existing data
+
+// Check if a specific survey has been answered
+const hasAnswered = await pulseInsight.isSurveyAnswered('SURVEY_ID');
+
+// Manually present a specific survey
+pulseInsight.presentSurvey('SURVEY_ID');
+
+// Enable or disable surveys
+pulseInsight.enableSurveys(true);
+
+// Set scan frequency (in seconds)
+pulseInsight.setScanFrequency(30);
+```
+
+## API Reference
+
+### PulseInsight Class
+
+#### Constructor
+
+```javascript
+const pulseInsight = new PulseInsight(options);
+```
+
+**Options:**
+- `accountId` (string, required): Your PulseInsight account ID
+- `enableDebugMode` (boolean, optional): Enable debug logging
+- `previewMode` (boolean, optional): Enable preview mode for testing
+- `customData` (object, optional): Custom data for survey targeting
+
+#### Methods
+
+- `initialize()`: Initialize the SDK
+- `setAccountID(accountId)`: Set or change the account ID
+- `setViewName(viewName)`: Set the current view name
+- `serve()`: Check and display eligible surveys
+- `presentSurvey(surveyId)`: Manually display a specific survey
+- `enableSurveys(enable)`: Enable or disable surveys
+- `isSurveysEnabled()`: Check if surveys are enabled
+- `setClientKey(clientKey)`: Set the client key
+- `getClientKey()`: Get the current client key
+- `setPreviewMode(enable)`: Enable or disable preview mode
+- `isPreviewModeEnabled()`: Check if preview mode is enabled
+- `isSurveyAnswered(surveyId)`: Check if a survey has been answered
+- `setContextData(data, merge)`: Set context data for survey targeting
+- `clearContextData()`: Clear all context data
+- `setDeviceData(properties)`: Set device-specific data
+- `setHost(hostName)`: Set the host name for the survey server
+- `setDebugMode(enable)`: Enable or disable debug mode
+- `resetUdid()`: Reset the unique device identifier
+- `finishInlineMode()`: Manually finish inline survey mode
+
+### RCTInlineSurveyView Component
+
+```javascript
+<RCTInlineSurveyView
+  identifier="SURVEY_ID"
+  style={styles.surveyContainer}
+  onFinish={handleSurveyFinish}
+  onContentLoaded={handleContentLoaded}
+/>
+```
+
+**Props:**
+- `identifier` (string, required): The survey ID to display
+- `style` (object, optional): Style properties for the survey container
+- `onFinish` (function, optional): Callback when survey is completed
+- `onContentLoaded` (function, optional): Callback when survey content is loaded
+
+## iOS Setup
+
+The SDK uses CocoaPods for dependency management. Make sure your Podfile includes:
+
+```ruby
+pod 'pulse-insight-react-native', :path => '../node_modules/pulse-insight-react-native'
+```
+
+## Android Setup
+
+Add the PulseInsights Maven repository to your project's build configuration:
+
+```gradle
+// In your project's root build.gradle or settings.gradle
+allprojects {
+    repositories {
+        // ... other repositories
+        maven {
+            url "https://pi-sdk.s3.us-east-1.amazonaws.com/android"
+        }
+    }
+}
+```
+
+## Example Project
+
+For a complete example project, see the [example directory](https://github.com/Pulse-Insights/pi-react-native/tree/main/example) in the GitHub repository.
 
 ## License
 

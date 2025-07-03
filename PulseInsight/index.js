@@ -1,9 +1,4 @@
-/**
- * @format
- */
+import PulseInsight, { RCTInlineSurveyView } from './sdk';
 
-import {AppRegistry} from 'react-native';
-import App from './example/App';
-import {name as appName} from './app.json';
-
-AppRegistry.registerComponent(appName, () => App);
+export default PulseInsight;
+export { RCTInlineSurveyView };

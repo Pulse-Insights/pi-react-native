@@ -10,13 +10,13 @@ Pod::Spec.new do |s|
   s.description      = package["description"]
   s.homepage         = package["homepage"]
   s.license          = package["license"]
-  s.platforms        = { :ios => "14.0" }
+  s.platforms        = { :ios => "16.0" }
   s.authors          = package["author"]
   s.source           = { :git => package["repository"]["url"], :tag => "v#{s.version}" }
   
   # React Native bridge files
   s.source_files     = "ios/**/*.{h,m,mm,swift}"
-  s.dependency "PulseInsightsSPM", "~> 1.0.12"
+  s.dependency "PulseInsightsSPM", "~> 1.0.13"
   
   s.requires_arc     = true
   s.swift_version    = '5.0'

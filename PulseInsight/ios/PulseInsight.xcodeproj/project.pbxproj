@@ -294,7 +294,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = com.pulseinsights.rn;
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = com.pulseinsights.reactnative;
 				PRODUCT_NAME = PulseInsight;
 				SWIFT_OBJC_BRIDGING_HEADER = "PulseInsight-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -323,7 +323,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = com.pulseinsights.rn;
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = com.pulseinsights.reactnative;
 				PRODUCT_NAME = PulseInsight;
 				SWIFT_OBJC_BRIDGING_HEADER = "PulseInsight-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

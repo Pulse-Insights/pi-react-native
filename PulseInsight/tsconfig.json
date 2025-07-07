@@ -10,15 +10,13 @@
     "skipLibCheck": true,
     "jsx": "react-native"
   },
-  "include": ["src/sdk/**/*", "specs/**/*"],
+  "include": ["sdk/**/*", "specs/**/*"],
   "exclude": [
     "node_modules",
     "**/__tests__/*",
     "lib",
     "ios",
     "android",
-    "src/screens/App.tsx",
-    "src/screens/**/*",
-    "src/components/**/*"
+    "example/**/*"
   ]
 }

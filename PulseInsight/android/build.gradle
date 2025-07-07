@@ -1,3 +1,14 @@
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath("com.android.tools.build:gradle:8.1.0")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0")
+    }
+}
+
 apply plugin: "com.android.library"
 apply plugin: "org.jetbrains.kotlin.android"
 
@@ -12,7 +23,7 @@ android {
     ndkVersion safeExtGet('ndkVersion', '25.1.8937393')
 
     defaultConfig {
-        minSdkVersion safeExtGet('minSdkVersion', 21)
+        minSdkVersion safeExtGet('minSdkVersion', 23)
         targetSdkVersion safeExtGet('targetSdkVersion', 34)
     }
 
@@ -21,6 +32,16 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = '17'
+        freeCompilerArgs += ["-Xskip-metadata-version-check"]
     }
 }
 
@@ -33,6 +54,6 @@ repositories {
 }
 
 dependencies {
-    implementation "com.facebook.react:react-android"
+    compileOnly "com.facebook.react:react-android:0.73.0"
     implementation 'com.pulseinsights:android-sdk:2.4.5'
 } 

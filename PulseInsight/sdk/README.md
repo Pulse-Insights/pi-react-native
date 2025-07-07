@@ -1,127 +1,74 @@
-# Pulse Insight React Native SDK Core
+# PulseInsight React Native SDK - Technical Reference
 
-> **Note for beginners:** If you're new to React Native or mobile development, we recommend starting with the example application in [/PulseInsight/example](../example) directory. The [example README](../README.md) provides step-by-step instructions for getting started.
+This document provides technical implementation details for developers who want to understand or contribute to the PulseInsight React Native SDK.
 
-This directory contains the core implementation of the Pulse Insight React Native SDK.
+> **Note:** For general usage and integration documentation, please refer to the [main SDK documentation](../README.md).
 
-## Structure
+## SDK Architecture
 
-- `index.ts` - Main SDK implementation and API
-- `/components` - React Native components used by the SDK
+The PulseInsight React Native SDK follows a bridge architecture pattern that connects React Native JavaScript code with native implementations on iOS and Android.
 
-## Important Usage Requirements
-
-**Before calling `serve()` or `presentSurvey()` methods, you MUST:**
-1. Initialize the SDK with a valid account ID
-2. Set a view name for proper survey targeting
-
-Failure to set these required values will result in no surveys being displayed.
-
-## API Reference
-
-### Initialization
-
-```javascript
-import { PulseInsight } from 'pulse-insight-react-native';
-
-// Initialize the SDK with required account ID
-const pulseInsight = new PulseInsight({
-  accountId: 'YOUR_ACCOUNT_ID',  // REQUIRED
-  enableDebugMode: __DEV__,      // Optional
-  previewMode: false,            // Optional
-  customData: { /* Custom data */ } // Optional
-});
-
-// Initialize the SDK
-await pulseInsight.initialize();
-
-// REQUIRED: Set a view name for targeting
-await pulseInsight.setViewName('YOUR_VIEW_NAME');
-
-// Now you can call serve() or presentSurvey()
-await pulseInsight.serve();
-await pulseInsight.presentSurvey('SURVEY_ID');
+```
+JavaScript Layer (React Native)
+         ↓
+   Native Module Bridge
+         ↓
+ ┌─────────┴─────────┐
+ ↓                   ↓
+iOS Native      Android Native
+(Swift)          (Kotlin)
 ```
 
-### Survey Management
+## Directory Structure
 
-```javascript
-// REQUIRED: Set view name before calling serve
-await pulseInsight.setViewName('home_screen');
+- `index.ts` - Main SDK implementation and API exports
+- `/components` - React Native components (e.g., RCTInlineSurveyView)
 
-// Check for available surveys and display them if conditions are met
-await pulseInsight.serve();
+## Core Implementation Details
 
-// Present a specific survey by ID
-await pulseInsight.presentSurvey('SURVEY_ID');
+### Native Module Registration
 
-// Check if a survey has been answered
-const isAnswered = await pulseInsight.isSurveyAnswered('SURVEY_ID');
-```
+The SDK registers native modules for both iOS and Android:
 
-### Context Data
+- iOS: `RCTPulseInsightModule` in Swift with Objective-C bridging
+- Android: `RCTPulseInsightModule` and `RCTPulseInsightPackage` in Kotlin
 
-```javascript
-// Set custom data
-pulseInsight.setContextData({ 
-  userId: '12345',
-  userType: 'premium'
-});
+### Component Registration
 
-// Clear context data
-pulseInsight.clearContextData();
-```
+The inline survey component is registered as a native UI component:
 
-### Configuration
+- iOS: `RCTInlineSurveyViewManager` (Swift)
+- Android: `RCTInlineSurveyViewManager` (Kotlin)
 
-```javascript
-// Enable/disable debug mode
-pulseInsight.setDebugMode(true);
+## Important Implementation Requirements
 
-// Enable/disable preview mode
-pulseInsight.setPreviewMode(true);
+When making changes to the SDK, ensure:
 
-// Set survey scan frequency (in seconds)
-pulseInsight.setScanFrequency(30);
+1. **Initialization Flow**: The SDK requires proper initialization before any survey operations
+2. **Event Handling**: Native events must be properly mapped to JavaScript callbacks
+3. **Error Handling**: All native method calls should include proper error handling
+4. **Memory Management**: Survey views should be properly cleaned up when no longer needed
 
-// Set client key
-pulseInsight.setClientKey('YOUR_CLIENT_KEY');
-```
+## Native Dependencies
 
-### Advanced
+- **iOS**: PulseInsightsSPM (Swift Package Manager)
+- **Android**: com.pulseinsights:android-sdk
 
-```javascript
-// Set custom host
-pulseInsight.setHost('custom-survey.yourdomain.com');
+## Development Workflow
 
-// Set device data
-pulseInsight.setDeviceData({
-  deviceModel: 'iPhone 16',
-  osVersion: '17.0',
-  appVersion: '1.2.3'
-});
+1. Make changes to the SDK code
+2. Test changes using the example app
+3. Update documentation if API changes are made
+4. Submit pull request with comprehensive testing
 
-// Reset device ID
-pulseInsight.resetDeviceId();
+## Build and Publish Process
 
-// Check if survey rendering is active
-const isActive = pulseInsight.isSurveyRenderingActive();
+To build and publish the SDK:
 
-// Switch survey scan on/off
-pulseInsight.switchSurveyScan(true);
-```
-
-## Typical Implementation Flow
-
-1. Initialize SDK with account ID
-2. Set view name based on current screen
-3. Call serve() to check for and display available surveys
-4. Set context data as needed for targeting
-5. Update view name when user navigates to a different screen
-
-## Development
-
-For information on how to develop and test this SDK, please refer to the [example application README](../README.md).
+1. Update version in package.json
+2. Run build process: `npm run build`
+3. Test the build with the example app
+4. Publish to npm: `npm publish`
 
 ## License
 

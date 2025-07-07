@@ -1,14 +1,54 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# PulseInsight React Native Example App
 
-# Getting Started
+This example application demonstrates how to integrate and use the PulseInsight React Native SDK in a real-world application.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## Features Demonstrated
 
-## Step 1: Start Metro
+- SDK initialization and configuration
+- Survey triggering and display
+- Context data management
+- Inline survey implementation
+- Event handling for survey completion
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## Setup Instructions
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+### Prerequisites
+
+- Node.js 16+ and npm/yarn
+- React Native development environment
+- Xcode 14+ (for iOS)
+- Android Studio (for Android)
+- Java 17 (for Android)
+
+### Configuration
+
+Before running the example, you need to configure it with your PulseInsight account details:
+
+1. Open `App.tsx`
+2. Locate the SDK initialization code:
+   ```javascript
+   const pulseInsight = new PulseInsight({
+     accountId: 'YOUR_ACCOUNT_ID',
+     enableDebugMode: true
+   });
+   ```
+3. Replace `'YOUR_ACCOUNT_ID'` with your actual PulseInsight account ID
+
+### Running the Example
+
+#### Step 1: Install Dependencies
+
+```sh
+# Install JavaScript dependencies
+npm install
+# or
+yarn
+
+# Install iOS dependencies
+cd ios && bundle install && bundle exec pod install && cd ..
+```
+
+#### Step 2: Start Metro
 
 ```sh
 # Using npm
@@ -18,11 +58,9 @@ npm start
 yarn start
 ```
 
-## Step 2: Build and run your app
+#### Step 3: Run on Device/Simulator
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
+**Android:**
 
 ```sh
 # Using npm
@@ -32,23 +70,7 @@ npm run android
 yarn android
 ```
 
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+**iOS:**
 
 ```sh
 # Using npm
@@ -58,40 +80,72 @@ npm run ios
 yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+## Example App Structure
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+- `App.tsx` - Main application with SDK integration examples
+- `ios/` - iOS native code and configuration
+- `android/` - Android native code and configuration
 
-## Step 3: Modify your app
+## Key Implementation Points
 
-Now that you have successfully run the app, let's make changes!
+### SDK Initialization
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+```javascript
+// App.tsx
+import { PulseInsight } from 'pulse-insight-react-native';
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+// Initialize the SDK
+const pulseInsight = new PulseInsight({
+  accountId: 'YOUR_ACCOUNT_ID',
+  enableDebugMode: true
+});
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+// Initialize the SDK
+await pulseInsight.initialize();
+```
 
-## Congratulations! :tada:
+### Setting View Name and Serving Surveys
 
-You've successfully run and modified your React Native App. :partying_face:
+```javascript
+// CRITICAL: You MUST set a view name before calling serve() or presentSurvey()
+// Surveys will not display without a valid view name
+pulseInsight.setViewName('HomeScreen');
 
-### Now what?
+// Now that view name is set, you can check for and display eligible surveys
+pulseInsight.serve();
+```
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+### Using the Inline Survey Component
 
-# Troubleshooting
+```javascript
+import { RCTInlineSurveyView } from 'pulse-insight-react-native';
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+// In your component's render method
+<RCTInlineSurveyView
+  identifier="YOUR_SURVEY_ID"
+  style={{ height: 400, width: '100%' }}
+  onFinish={(event) => {
+    console.log('Survey completed:', event.nativeEvent.success);
+  }}
+  onContentLoaded={(event) => {
+    console.log('Content height:', event.nativeEvent.height);
+  }}
+/>
+```
 
-# Learn More
+## Troubleshooting
 
-To learn more about React Native, take a look at the following resources:
+If you encounter issues running the example:
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+- **iOS Build Errors**: Try cleaning the build folder in Xcode and running `pod install` again
+- **Android Build Errors**: Verify Java 17 is properly configured
+- **Survey Not Displaying**: Check if you've called `setViewName()` before `serve()` or `presentSurvey()`
+- **Native Module Error**: Ensure you've run `pod install` for iOS or have the correct Maven repository for Android
+
+For more detailed troubleshooting, refer to the [main SDK documentation](../../README.md).
+
+## React Native Development Resources
+
+- [React Native Website](https://reactnative.dev)
+- [Getting Started Guide](https://reactnative.dev/docs/environment-setup)
+- [Troubleshooting](https://reactnative.dev/docs/troubleshooting)

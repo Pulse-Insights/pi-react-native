@@ -17,7 +17,7 @@ import {
   Platform,
 } from 'react-native';
 
-import PulseInsight from '../sdk';
+import PulseInsight from 'pulse-insight-react-native';
 
 function App(): React.JSX.Element {
   const [sdkInitialized, setSdkInitialized] = useState(false);

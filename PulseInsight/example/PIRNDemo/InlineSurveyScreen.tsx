@@ -10,7 +10,7 @@ import {
   StatusBar,
   Platform,
 } from 'react-native';
-import PulseInsight, { RCTInlineSurveyView } from '../sdk';
+import PulseInsight, { RCTInlineSurveyView } from 'pulse-insight-react-native';
 
 interface InlineSurveyScreenProps {
   sdk: PulseInsight | null;

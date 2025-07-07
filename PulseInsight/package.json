@@ -5,8 +5,6 @@
   "main": "lib/sdk/index.js",
   "types": "lib/sdk/index.d.ts",
   "scripts": {
-    "build:android": "cd android && ./gradlew clean build",
-    "build:ios": "cd ios && xcodebuild -workspace PulseInsight.xcworkspace -scheme PulseInsight -configuration Release -sdk iphonesimulator",
     "lint": "eslint .",
     "test": "jest",
     "build": "tsc",

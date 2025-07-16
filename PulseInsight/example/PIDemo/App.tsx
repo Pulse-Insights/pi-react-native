@@ -21,8 +21,9 @@ import PulseInsight from 'pulse-insight-react-native';
 
 function App(): React.JSX.Element {
   const [sdkInitialized, setSdkInitialized] = useState(false);
-  const [accountId, setAccountId] = useState('YOUR_ACCOUNT_ID');
-  const [viewName, setViewName] = useState('YOUR_VIEW_NAME');
+  const [accountId, setAccountId] = useState('PI-58082303');
+  const [viewName, setViewName] = useState('mainActivity');
+  const [hostURL, setHostURL] = useState('survey.pulseinsights.com');
   const [clientKey, setClientKey] = useState('');
   const [surveyId, setSurveyId] = useState('');
   const [presentSurveyId, setPresentSurveyId] = useState('');
@@ -60,7 +61,7 @@ function App(): React.JSX.Element {
         setSdkInitialized(success);
 
         if (success) {
-          pulseInsightRef.current?.setHost('YOUR_HOST_URL');
+          pulseInsightRef.current?.setHost(hostURL);
           pulseInsightRef.current?.setViewName(viewName);
           console.log('SDK initialized successfully');
         } else {
@@ -73,7 +74,43 @@ function App(): React.JSX.Element {
     }
 
     initSDK();
-  }, [accountId, viewName]);
+  }, [accountId, viewName, hostURL]);
+
+  // Validate if host is set before making requests
+  const validateHost = (): boolean => {
+    if (!hostURL.trim()) {
+      Alert.alert(
+        'Host Required',
+        'Please set a host URL before making requests. Go to Configuration section and enter a host URL.',
+        [{ text: 'OK' }]
+      );
+      return false;
+    }
+    return true;
+  };
+
+  const saveHostURL = () => {
+    if (!hostURL.trim()) {
+      Alert.alert('Error', 'Please enter Host URL');
+      return;
+    }
+
+    if (!pulseInsightRef.current || !sdkInitialized) {
+      Alert.alert('Error', 'SDK not initialized');
+      return;
+    }
+
+    // Call setHost method
+    pulseInsightRef.current.setHost(hostURL)
+      .then(() => {
+        console.log('Host URL set successfully');
+        Alert.alert('Success', `Host URL set to: ${hostURL}`);
+      })
+      .catch(err => {
+        console.error('Failed to set host URL:', err);
+        Alert.alert('Error', 'Failed to set Host URL');
+      });
+  };
 
   const saveAccountId = () => {
     if (!pulseInsightRef.current || !sdkInitialized) {
@@ -185,6 +222,11 @@ function App(): React.JSX.Element {
       return;
     }
 
+    // Validate host is set before making request
+    if (!validateHost()) {
+      return;
+    }
+
     // Call serve method
     pulseInsightRef.current.serve()
       .then(() => {})
@@ -202,6 +244,11 @@ function App(): React.JSX.Element {
 
     if (!pulseInsightRef.current || !sdkInitialized) {
       Alert.alert('Error', 'SDK not initialized');
+      return;
+    }
+
+    // Validate host is set before making request
+    if (!validateHost()) {
       return;
     }
 
@@ -424,6 +471,9 @@ function App(): React.JSX.Element {
           <Text style={styles.subtitle}>
             Account ID: {accountId}
           </Text>
+          <Text style={styles.subtitle}>
+            Host URL: {hostURL || 'Not Set'}
+          </Text>
         </View>
 
         {/* Configuration Section */}
@@ -453,6 +503,19 @@ function App(): React.JSX.Element {
             />
             <TouchableOpacity style={styles.saveButton} onPress={saveViewName}>
               <Text style={styles.saveButtonText}>Save</Text>
+            </TouchableOpacity>
+          </View>
+
+          {/* Host URL Input */}
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter Host URL (e.g., survey.pulseinsights.com)"
+              value={hostURL}
+              onChangeText={setHostURL}
+            />
+            <TouchableOpacity style={styles.saveButton} onPress={saveHostURL}>
+              <Text style={styles.saveButtonText}>Save Host</Text>
             </TouchableOpacity>
           </View>
 

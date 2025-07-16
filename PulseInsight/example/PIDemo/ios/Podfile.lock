@@ -8,11 +8,11 @@ PODS:
   - hermes-engine (0.79.2):
     - hermes-engine/Pre-built (= 0.79.2)
   - hermes-engine/Pre-built (0.79.2)
-  - pulse-insight-react-native (0.1.22):
+  - pulse-insight-react-native (0.1.24):
     - DoubleConversion
     - glog
     - hermes-engine
-    - PulseInsightsSPM (~> 1.0.13)
+    - PulseInsightsSPM (~> 1.0.14)
     - RCT-Folly (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -33,7 +33,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - PulseInsightsSPM (1.0.13)
+  - PulseInsightsSPM (1.0.14)
   - RCT-Folly (2024.11.18.00):
     - boost
     - DoubleConversion
@@ -1916,8 +1916,8 @@ SPEC CHECKSUMS:
   fmt: a40bb5bd0294ea969aaaba240a927bd33d878cdd
   glog: 5683914934d5b6e4240e497e0f4a3b42d1854183
   hermes-engine: 314be5250afa5692b57b4dd1705959e1973a8ebe
-  pulse-insight-react-native: 9bbb19fa06b32bf215f0fc1e20be10feac893535
-  PulseInsightsSPM: 09dd19fbaafb97b9d26e68cb89ac7b2350649e6c
+  pulse-insight-react-native: ef3819795e648e712674e47d6651d11a379b9bc9
+  PulseInsightsSPM: a8286673f8919962358a92f6594e66e146feb3c7
   RCT-Folly: 36fe2295e44b10d831836cc0d1daec5f8abcf809
   RCTDeprecation: 83ffb90c23ee5cea353bd32008a7bca100908f8c
   RCTRequired: eb7c0aba998009f47a540bec9e9d69a54f68136e

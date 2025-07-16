@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   
   # React Native bridge files
   s.source_files     = "ios/**/*.{h,m,mm,swift}"
-  s.dependency "PulseInsightsSPM", "~> 1.0.13"
+  s.dependency "PulseInsightsSPM", "~> 1.0.14"
   
   s.requires_arc     = true
   s.swift_version    = '5.0'

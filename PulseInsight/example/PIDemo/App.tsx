@@ -21,8 +21,8 @@ import PulseInsight from 'pulse-insight-react-native';
 
 function App(): React.JSX.Element {
   const [sdkInitialized, setSdkInitialized] = useState(false);
-  const [accountId, setAccountId] = useState('PI-58082303');
-  const [viewName, setViewName] = useState('mainActivity');
+  const [accountId, setAccountId] = useState('YOUR_ACCOUNT_ID');
+  const [viewName, setViewName] = useState('YOUR_VIEW_NAME');
   const [hostURL, setHostURL] = useState('survey.pulseinsights.com');
   const [clientKey, setClientKey] = useState('');
   const [surveyId, setSurveyId] = useState('');
